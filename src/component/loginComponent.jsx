@@ -1,4 +1,4 @@
-import WhiteLogo from "./WhiteLogo";
+import WhiteLogo from "./logo/WhiteLogo";
 import { Link } from "react-router-dom";
 
 function LoginComponent() {
