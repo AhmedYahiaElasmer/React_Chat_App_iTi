@@ -11,7 +11,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/home/*" element={<Home />} />
       </Routes> */}
-      <Login/>
+      {/* <Login/> */}
+      <Register/>
     </>
   );
 }
