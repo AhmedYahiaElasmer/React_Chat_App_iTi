@@ -80,7 +80,7 @@ function Login() {
               <div className="bg-gray-100 py-5 px-14 rounded-md">
                 <FontAwesomeIcon
                   icon={faGithub}
-                  className="text-4xl border-"
+                  className="text-4xl border-1"
                 />
               </div>
              
