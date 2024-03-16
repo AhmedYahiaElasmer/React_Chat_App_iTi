@@ -65,19 +65,28 @@ function Login() {
               </div>
             </div>
             <div className="flex justify-between w-full">
-              <div>
-                <FontAwesomeIcon icon={faGithub} />
+              <div className="bg-gray-100 py-5 px-14 rounded-md">
+                <FontAwesomeIcon
+                  icon={faGithub}
+                  className="text-4xl border-"
+                />
               </div>
-              <div>
-                <FontAwesomeIcon icon={faGithub} />
+              <div className="bg-gray-100 py-5 px-14 rounded-md">
+                <FontAwesomeIcon
+                  icon={faGithub}
+                  className="text-4xl border-"
+                />
               </div>
-              <div>
-                <FontAwesomeIcon icon={faGithub} />
+              <div className="bg-gray-100 py-5 px-14 rounded-md">
+                <FontAwesomeIcon
+                  icon={faGithub}
+                  className="text-4xl border-"
+                />
               </div>
              
             </div>
             <div>
-              <button></button>
+              <button className=""></button>
               <p></p>
             </div>
           </form>
