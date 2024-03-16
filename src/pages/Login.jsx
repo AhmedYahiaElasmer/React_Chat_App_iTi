@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import WhiteLogo from "../component/logo/WhiteLogo";
 import "./loginStyle.css";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+
 
 function Login() {
   return (
@@ -27,14 +29,21 @@ function Login() {
             <p className="font-medium text-base tracking-wider">
               If you are new user please sign up to our world
             </p>
+
             <Link
               to={"/register"}
               className="btn btn-wide bg-transparent border-white	text-white btnhover"
+
+            <Link to={"/register"}
+              className="btn btn-wide bg-transparent border-white	text-white btnhover"
+              
+
             >
               Sign up now for free...
             </Link>
           </div>
         </div>
+
 
         <div className="bg-white flex flex-col justify-center items-center">
           <form className="border rounded-lg shadow-md  flex flex-col text-black gap-12 justify-center items-center py-16 px-24">
@@ -89,6 +98,13 @@ function Login() {
               <button className=""></button>
               <p></p>
             </div>
+
+        <div className="bg-gray-300 p-4">
+          <form>
+
+
+
+
           </form>
         </div>
       </div>
