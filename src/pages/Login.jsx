@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
 import WhiteLogo from "../component/logo/WhiteLogo";
 import "./loginStyle.css";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-
 
 function Login() {
   return (
@@ -13,7 +11,6 @@ function Login() {
         <div className="min-h-full text-white flex flex-col justify-between items-center lg:pt-14 lg:pb-24 md:py-14 bgc">
           <div className="flex flex-col lg:gap-7  justify-center items-center">
             <div>
-              {" "}
               <WhiteLogo />
             </div>
             <div className="flex flex-col justify-center items-center gap-1 ">
@@ -29,21 +26,14 @@ function Login() {
             <p className="font-medium text-base tracking-wider">
               If you are new user please sign up to our world
             </p>
-
             <Link
-              to={"/register"}
+              to="/register"
               className="btn btn-wide bg-transparent border-white	text-white btnhover"
-
-            <Link to={"/register"}
-              className="btn btn-wide bg-transparent border-white	text-white btnhover"
-              
-
             >
               Sign up now for free...
             </Link>
           </div>
         </div>
-
 
         <div className="bg-white flex flex-col justify-center items-center">
           <form className="border rounded-lg shadow-md  flex flex-col text-black gap-12 justify-center items-center py-16 px-24">
@@ -75,16 +65,10 @@ function Login() {
             </div>
             <div className="flex justify-between w-full">
               <div className="bg-gray-100 py-5 px-14 rounded-md">
-                <FontAwesomeIcon
-                  icon={faGithub}
-                  className="text-4xl border-"
-                />
+                <FontAwesomeIcon icon={faGithub} className="text-4xl border-" />
               </div>
               <div className="bg-gray-100 py-5 px-14 rounded-md">
-                <FontAwesomeIcon
-                  icon={faGithub}
-                  className="text-4xl border-"
-                />
+                <FontAwesomeIcon icon={faGithub} className="text-4xl border-" />
               </div>
               <div className="bg-gray-100 py-5 px-14 rounded-md">
                 <FontAwesomeIcon
@@ -92,19 +76,11 @@ function Login() {
                   className="text-4xl border-1"
                 />
               </div>
-             
             </div>
             <div>
               <button className=""></button>
               <p></p>
             </div>
-
-        <div className="bg-gray-300 p-4">
-          <form>
-
-
-
-
           </form>
         </div>
       </div>
