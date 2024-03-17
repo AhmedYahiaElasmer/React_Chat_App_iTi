@@ -205,6 +205,7 @@ function RegisterForm() {
         </div>
       </form>
     </div>
+
   );
 }
 

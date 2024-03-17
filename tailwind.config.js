@@ -15,6 +15,15 @@ export default {
       },
     },
   },
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          white: "#FFFFFF",
+        },
+      },
+    ],
+  },
   plugins: [require("daisyui")],
   daisyui: {
     themes: ["mytheme", "light"],
