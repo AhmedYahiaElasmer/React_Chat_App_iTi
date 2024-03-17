@@ -10,7 +10,7 @@
   background: linear-gradient(90deg, #041ad8 0%, #b012aa 78.84%);
   border: none;
   transition: 0.2s;
-
+}
 .linkColor {
   color: linear-gradient(90deg, #041ad8 0%, #b012aa 78.84%);
   border: none;
@@ -29,4 +29,3 @@
   background-clip: text;
   color: transparent; /* Hide original text */
 }
-
