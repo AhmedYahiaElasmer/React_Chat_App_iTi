@@ -23,7 +23,7 @@ function LoginComponent() {
         </p>
         <Link
           to="/register"
-          className="btn btn-wide bg-transparent border-white	text-white btnhover"
+          className="btn btn-wide bg-transparent outline-none border-white	text-white btnhover"
         >
           Sign up now for free...
         </Link>
