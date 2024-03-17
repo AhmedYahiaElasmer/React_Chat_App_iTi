@@ -5,14 +5,18 @@ import ChatRoom from "./ChatRoom";
 import ProfileDetails from "./ProfileDetails";
 import EditDetails from "./EditDetails";
 import useLogout from "../hooks/useLogout";
+import Homee from "./Homee";
 
 function Home() {
-  const {loading,logout}=useLogout()
+  // const {loading,logout}=useLogout()
   return (
     <>
-    <button onClick={logout}>logout</button>
+
+
+
+    {/* <button onClick={logout}>logout</button> */}
       <Routes>
-        <Route path="/" element={<Button />} />
+        <Route path="/" element={<Homee />} />
         <Route path="/userchat" element={<UserChat />} />
         <Route path="/chatroom" element={<ChatRoom />} />
         <Route path="/profiledetails" element={<ProfileDetails />} />

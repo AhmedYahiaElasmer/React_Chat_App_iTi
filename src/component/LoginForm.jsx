@@ -1,6 +1,9 @@
+
 import { useForm } from "react-hook-form";
 import useLogin from "../hooks/useLogin";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub, faGoogle, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 
 function LoginForm() {
   const {
@@ -55,8 +58,18 @@ function LoginForm() {
             <p className="text-zinc-600 text-sm">Forgot password?</p>
           </div>
         </div>
+      
         <div className="flex justify-between w-full">
-          {/* Social login buttons */}
+          <div className="bg-gray-100 py-3 px-8 rounded-md btnhover hover:text-white">
+            <FontAwesomeIcon icon={faGithub} className="text-3xl " />
+          </div>
+          <div className="bg-gray-100 py-3 px-8 rounded-md btnhover hover:text-white">
+            <FontAwesomeIcon icon={faGoogle} className="text-3xl " />
+          </div>
+          <div className="bg-gray-100 py-3 px-8 rounded-md btnhover hover:text-white">
+            <FontAwesomeIcon icon={faXTwitter} className="text-3xl " />
+          </div>
+       
         </div>
         <div>
           <button
