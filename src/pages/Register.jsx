@@ -11,8 +11,6 @@ function Register() {
 
         <RegisterForm />
 
-       
-
         <RegisterLogo />
       </div>
     </div>

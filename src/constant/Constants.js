@@ -1,0 +1,1 @@
+export const API = "https://chat-app-backend-x0hh.onrender.com/api/v1";
