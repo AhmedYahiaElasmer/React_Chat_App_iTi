@@ -13,7 +13,7 @@ function App() {
       </Routes> */}
 
       <Login />
-      {/* <Register/> */}
+      <Register />
     </>
   );
 }
