@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { UplaodFile } from "../utils/uploadimage";
 
-function Login() {
+//import { useState } from "react";
+//import { UplaodFile } from "../utils/uploadimage";
+
+//function Login() {
 
   // const [file,setFile] = useState();
 
@@ -27,7 +28,31 @@ function Login() {
 
   //   </>
   // )
-  return <div>Login</div>;
+ // return <div>Login</div>;
+
+import "./loginStyle.css";
+
+
+import LoginComponent from "../component/loginComponent";
+import LoginForm from "../component/LoginForm";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+
+
+
+function Login() {
+  return (
+    <div className="">
+      <div className="grid grid-cols-2 h-screen bg-black ">
+
+        <LoginComponent />
+        <LoginForm />
+
+      </div>
+    </div>
+  );
+
 }
 
 export default Login;
