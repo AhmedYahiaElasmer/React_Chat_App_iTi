@@ -10,7 +10,7 @@ export default function BlackLogo() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_36_138)">
+      <g clipPath="url(#clip0_36_138)">
         <path
           d="M-0.0654297 16.7857H216.553L176.245 97.8887L158.158 63.9349L164.938 49.2288L126.139 49.9841L126.512 199.358L108.239 235.187L90.3388 202.361V50.3571L51.9214 48.8464L58.7015 62.0512L40.2426 99.3901L-0.0654297 16.7857Z"
           fill="black"
@@ -33,7 +33,7 @@ export default function BlackLogo() {
           y2="105.507"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="white" />
+          <stop stopColor="white" />
           <stop offset="1" />
         </linearGradient>
         <linearGradient
@@ -44,7 +44,7 @@ export default function BlackLogo() {
           y2="110.5"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="white" />
+          <stop stopColor="white" />
           <stop offset="1" />
         </linearGradient>
         <clipPath id="clip0_36_138">

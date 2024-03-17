@@ -1,11 +1,12 @@
-function Required() {
+function Required(props) {
+  const {error} = props
   return (
     <span className="p-2 inline-block  ">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
-        className="inline-block  text-red-500 w-4 h-4 stroke-current"
+        className={`inline-block ${error?"text-red-500" :""} w-4 h-4 stroke-current`}
       >
         <path
           strokeLinecap="round"

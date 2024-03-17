@@ -5,29 +5,56 @@ import { useRef } from "react";
 import Required from "./required";
 import { useState } from "react";
 import { UplaodFile } from "../../utils/uploadimage";
+import Avatar from "../Avatar";
+import { signUp } from "../../api/auth";
 
 function RegisterForm() {
-  const [file, setFile] = useState();
+  const [fileUpload, onFileUpload] = useState("");
 
   const uploadAvatarHandler = async () => {
     try {
-      if (file) {
-        const urlFile = await UplaodFile("avatar", file);
-        console.log(urlFile);
+      if (fileUpload) {
+        const urlFile = await UplaodFile("avatar", fileUpload);
+        console.log(fileUpload);
       }
     } catch (error) {
       console.log(error);
     }
   };
+
+
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors, dirtyFields },
-  } = useForm();
+    formState: { errors, dirtyFields },  
+  } = useForm({
+    mode:"onChange"
+  });
   const password = useRef({});
   password.current = watch("password", "");
-  const onSubmit = (data) => console.log(data);
+
+  const onSubmit =  async (data) => {
+    let urlFile=""; //image Url back from Firebase
+    console.log(data);
+    const {fristName , password ,email , lastName} = data
+
+
+    if (fileUpload) urlFile = await UplaodFile("avatar", fileUpload);
+
+    
+    const signUp_ = await  signUp({
+      firstname:fristName,
+      lastname:lastName,
+      gender:"male",
+      email,
+      password,
+      image:urlFile
+    })
+
+    
+    console.log({signUp_ ,urlFile });
+  };
 
   return (
     <>
@@ -46,28 +73,29 @@ function RegisterForm() {
       <div className="p-4 bg-black bgc">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="  flex flex-col text-white gap-12 justify-center items-center py-16 px-24"
+          className="  flex flex-col text-white gap-8 justify-center items-center py-16 px-24"
         >
-          <div className="flex flex-col gap-4 ">
+          <div className="flex flex-col gap-4 items-center ">
             <h1 className="text-2xl font-extrabold">Create new account</h1>
+            <Avatar onFileUpload={onFileUpload}  />
           </div>
           <div className="flex flex-col  ">
             <div className="flex gap-6  ">
               <div className="flex flex-col  ">
                 <label htmlFor="fristName" className="w-auto">
-                  Frist Name
-                  <Required />
+                  First Name
+                  <Required error={errors.fristName}/>
                 </label>
                 <input
                   {...register("fristName", {
-                    required: "Frist Name requierd",
+                    required: "First Name requierd",
                     maxLength: {
                       value: 12,
-                      message: "fristName must 12 characters",
+                      message: "First Name must 12 characters",
                     },
                     minLength: {
                       value: 4,
-                      message: "fristName must 4 characters",
+                      message: "First Name must 4 characters",
                     },
                   })}
                   id="fristName"
@@ -80,7 +108,7 @@ function RegisterForm() {
                         }  input input-bordered bg-transparent   w-auto`
                   }
                 />
-                {console.log(dirtyFields?.fristName)}
+                {/* {console.log(dirtyFields?.fristName)} */}
                 <span className="text-red-600 h-7">
                   {errors.fristName?.message}
                 </span>
@@ -94,11 +122,11 @@ function RegisterForm() {
                   {...register("lastName", {
                     maxLength: {
                       value: 12,
-                      message: "lastName must 12 characters",
+                      message: "LastName must 12 characters",
                     },
                     minLength: {
                       value: 4,
-                      message: "lastName must 4 characters",
+                      message: "LastName must 4 characters",
                     },
                   })}
                   id="lastName"
@@ -119,7 +147,7 @@ function RegisterForm() {
             </div>
 
             <label htmlFor="email" className="w-auto">
-              E-mail <Required />
+              E-mail <Required error={errors.email}/>
             </label>
 
             <input
@@ -144,7 +172,7 @@ function RegisterForm() {
             <span className="text-red-600 h-7">{errors.email?.message}</span>
 
             <label htmlFor="password" className="w-auto">
-              Password <Required />
+              Password <Required error={errors.password}/>
             </label>
             <input
               {...register("password", {
@@ -190,7 +218,7 @@ function RegisterForm() {
               )}
             </div>
             <label htmlFor="Re-password" className="w-auto">
-              Re-Password <Required />
+              Re-Password <Required error={errors.Repassword}/>
             </label>
             <input
               {...register("Repassword", {

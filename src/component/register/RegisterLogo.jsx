@@ -3,7 +3,7 @@ import BlackLogo from "../logo/BlackLogo";
 
 function RegisterLogo() {
   return (
-    <div className="min-h-full text-black flex flex-col justify-between items-center lg:pt-14 lg:pb-24 md:py-14 ">
+    <div className="min-h-full text-black flex flex-col justify-around items-center lg:pt-14 lg:pb-24 md:py-14 ">
       <div className="flex flex-col lg:gap-7  justify-center items-center">
         <div>
           <BlackLogo />
