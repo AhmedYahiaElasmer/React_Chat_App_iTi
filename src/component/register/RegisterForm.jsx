@@ -5,8 +5,10 @@ import { useRef } from "react";
 import Required from "./required";
 import { useState } from "react";
 import { UplaodFile } from "../../utils/uploadimage";
+
 import Avatar from "../Avatar";
 import { signUp } from "../../api/auth";
+
 
 function RegisterForm() {
   const [fileUpload, onFileUpload] = useState("");
