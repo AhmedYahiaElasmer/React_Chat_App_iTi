@@ -4,10 +4,13 @@ import UserChat from "./UserChat";
 import ChatRoom from "./ChatRoom";
 import ProfileDetails from "./ProfileDetails";
 import EditDetails from "./EditDetails";
+import useLogout from "../hooks/useLogout";
 
 function Home() {
+  const {loading,logout}=useLogout()
   return (
     <>
+    <button onClick={logout}>logout</button>
       <Routes>
         <Route path="/" element={<Button />} />
         <Route path="/userchat" element={<UserChat />} />

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { useState } from "react";
-import { UplaodFile } from "../utils/uploadimage";
+import { UplaodFile } from "../../utils/uploadimage";
 
 function RegisterForm() {
   const [file, setFile] = useState();
