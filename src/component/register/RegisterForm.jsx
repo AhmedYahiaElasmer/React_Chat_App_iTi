@@ -46,7 +46,6 @@ function RegisterForm() {
     const signUp_ = await  signUp({
       firstname:fristName,
       lastname:lastName,
-      gender:"male",
       email,
       password,
       image:urlFile
