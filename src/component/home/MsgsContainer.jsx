@@ -11,7 +11,7 @@ import ChatBar from "../messages/ChatBar";
 
 const MsgsContainer = () => {
   return (
-    <div className="bg-msg-container h-screen text-white ">
+    <div className="bg-msg-container  h-screen text-white ">
       {/* navbar */}
       <div className="flex justify-between bgnav py-3 px-6 items-center ">
         <div className="flex justify-center items-center gap-5">
@@ -35,11 +35,11 @@ const MsgsContainer = () => {
         </div>
       </div>
       {/* msg-container */}
-      <div className="px-4 flex-1 flex flex-col overflow ">
+      <div className="px-4  flex-1 flex flex-col overflow  w-full ">
         <Message />
         <Message />
         <Message />
-        <div className="">
+        <div className="absolute bottom-0 -left-[-23.5%]   w-3/4 ">
           <ChatBar />
         </div>
       </div>
