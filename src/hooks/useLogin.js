@@ -8,17 +8,20 @@ const useLogin = () => {
   const [loading, setLoading] = useState(false);
   const { setAuthUser } = useAuthContext();
 
-  const login = async (email, password) => {
+  const login = async (email, password,rememberMe) => {
     setLoading(true);
     try {
       const response = await axios.post("https://chat-app-backend-x0hh.onrender.com/api/v1/auth/login", { email, password });
       const data = JSON.stringify(response.data);
       if (data.error) {
-        throw new Error(data.error);
-        
+        throw new Error(data.error);   
+      }else{
+      if (rememberMe) {
+        localStorage.setItem("token", data);
+      } else {
+        sessionStorage.setItem("token", data);
       }
-      Cookies.set("token", data);
-      setAuthUser(data);
+      setAuthUser(data);}
     } catch (error) {
       toast.error(error.message);
     } finally {

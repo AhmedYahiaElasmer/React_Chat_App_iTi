@@ -8,8 +8,10 @@ export const useAuthContext = () => {
 };
 
 export const AuthContextProvider = ({ children }) => {
-  const [authUser, setAuthUser] = useState(
-    Cookies.get("token") ? JSON.parse(Cookies.get("token")) : null
+  const [authUser, setAuthUser] = useState(() => {
+    const token = localStorage.getItem("token") || sessionStorage.getItem("token")
+    return token ? JSON.parse(token) : null;
+  }
   );
 
   return (

@@ -31,20 +31,17 @@
 
 import "./loginStyle.css";
 
-import LoginComponent from "../component/loginComponent";
-import LoginForm from "../component/LoginForm";
+import LoginComponent from "../component/login/loginComponent";
+import LoginForm from "../component/login/LoginForm";
 
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 
 function Login() {
   return (
     <div className="">
-      <div className="grid grid-cols-2 h-screen bg-black ">
-        <LoginComponent />
-        <LoginForm />
+      <div className="grid grid-cols-1 md:grid-cols-2 h-screen bg-black">
+        <LoginComponent className="hidden md:block" />
+        <LoginForm className="col-span-2 md:col-span-1" />
       </div>
     </div>
   );
