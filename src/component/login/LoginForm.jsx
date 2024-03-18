@@ -1,9 +1,10 @@
 
 import { useForm } from "react-hook-form";
-import useLogin from "../hooks/useLogin";
+import useLogin from "../../hooks/useLogin";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faGoogle, faXTwitter } from "@fortawesome/free-brands-svg-icons";
+import BlackLogo from "../logo/BlackLogo";
 
 function LoginForm() {
   const {
@@ -14,24 +15,26 @@ function LoginForm() {
   const { loading, login } = useLogin();
 
   const onSubmit = async (data) => {
-    await login(data.email, data.password);
+    await login(data.email, data.password,data.rememberMe);
+    console.log(data);
   };
 
   return (
     <div className="bg-white flex flex-col justify-center items-center">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="border rounded-lg shadow-md flex flex-col text-black gap-12 justify-center items-center py-16 px-24"
+        className="border rounded-lg shadow-md flex flex-col text-black  gap-8 justify-center items-center pb-12  md:py-16  lg:py-24 px-20 lg:px-20 md:px-8"
       >
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col md:gap-4 gap-1">
+          <div className="md:hidden flex flex-col scale-50 justify-start items-center"><BlackLogo/> </div>
           <h2 className="text-2xl font-bold">Back to your world</h2>
           <p>Choose one of the options to go</p>
         </div>
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2 md:gap-3">
           <input
             type="email"
             placeholder="example@example.com"
-            className="input input-bordered w-full mb-4"
+            className="input input-bordered w-full "
             {...register("email", { required: true })}
           />
           {errors.email && <p className="text-red-500">Email is required</p>}
@@ -49,24 +52,25 @@ function LoginForm() {
               <input
                 type="checkbox"
                 className="checkbox mr-1 checkbox-xs"
-                id="rememberme"
+                id="rememberMe"
+                {...register("rememberMe")}
               />
-              <label htmlFor="rememberme" className="text-zinc-600 text-sm">
+              <label htmlFor="rememberMe" className="text-zinc-600 align-top text-xs md:text-sm">
                 Remember Me
               </label>
             </div>
-            <p className="text-zinc-600 text-sm">Forgot password?</p>
+            <p className="text-zinc-600 text-xs md:text-sm">Forgot password?</p>
           </div>
         </div>
       
         <div className="flex justify-between w-full">
-          <div className="bg-gray-100 py-3 px-8 rounded-md btnhover hover:text-white">
+          <div className="bg-gray-100 py-3 md:px-8 px-5 rounded-md btnhover hover:text-white">
             <FontAwesomeIcon icon={faGithub} className="text-3xl " />
           </div>
-          <div className="bg-gray-100 py-3 px-8 rounded-md btnhover hover:text-white">
+          <div className="bg-gray-100 py-3 md:px-8 px-5 rounded-md btnhover hover:text-white">
             <FontAwesomeIcon icon={faGoogle} className="text-3xl " />
           </div>
-          <div className="bg-gray-100 py-3 px-8 rounded-md btnhover hover:text-white">
+          <div className="bg-gray-100 py-3 md:px-8 px-5 rounded-md btnhover hover:text-white">
             <FontAwesomeIcon icon={faXTwitter} className="text-3xl " />
           </div>
        

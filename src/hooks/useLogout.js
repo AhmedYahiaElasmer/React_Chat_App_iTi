@@ -11,7 +11,12 @@ const useLogout = () => {
   const logout = async () => {
     setLoading(true);
     try {
-      Cookies.remove("token");
+      if (localStorage.getItem("token")) {
+        localStorage.removeItem("token");
+      }
+      if (sessionStorage.getItem("token")) {
+        sessionStorage.removeItem("token");
+      }
       setAuthUser(null);
     } catch (error) {
       toast.error(error.message);
