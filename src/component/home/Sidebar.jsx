@@ -6,6 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import User from "../users/User";
 
 const Sidebar = () => {
   return (
@@ -61,14 +62,12 @@ const Sidebar = () => {
       </div>
       <div className="p-5 ">
         <h4 className="font-medium pb-4">All Users</h4>
-        <div className="flex flex-col items-center overflow-auto gap-5">
-            {/* put the custum component inside the dv */}
-          <div className="bg-gray-400 h-16 w-full ">user1</div>
-          <div className="bg-gray-400 h-16 w-full ">user1</div>
-          <div className="bg-gray-400 h-16 w-full ">user1</div>
-          <div className="bg-gray-400 h-16 w-full ">user1</div>
-          <div className="bg-gray-400 h-16 w-full ">user1</div>
-          <div className="bg-gray-400 h-16 w-full ">user1</div>
+        <div className="flex flex-col items-start overflow-auto gap-5">
+          {/* put the custum component inside the dv */}
+          <User />
+          <User />
+          <User />
+          <User />
         </div>
       </div>
     </div>

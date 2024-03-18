@@ -6,6 +6,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Msg from "./Msg";
+import Message from "../messages/Message";
+import ChatBar from "../messages/ChatBar";
 
 const MsgsContainer = () => {
   return (
@@ -33,8 +35,13 @@ const MsgsContainer = () => {
         </div>
       </div>
       {/* msg-container */}
-      <div className="px-4 flex-1 overflow ">
-       
+      <div className="px-4 flex-1 flex flex-col overflow ">
+        <Message />
+        <Message />
+        <Message />
+        <div className="">
+          <ChatBar />
+        </div>
       </div>
     </div>
   );
