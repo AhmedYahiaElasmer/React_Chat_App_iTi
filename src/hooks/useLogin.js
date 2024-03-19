@@ -25,7 +25,7 @@ const useLogin = () => {
           // console.log(data);
           // console.log(JSON.parse(data).token);
           const resData = JSON.parse(data);
-          sessionStorage.setItem("token", `"${resData.token}"`);
+          sessionStorage.setItem("token", `${response.data.token}`);
         }
         setAuthUser(data);
       }

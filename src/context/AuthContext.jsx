@@ -8,9 +8,10 @@ export const useAuthContext = () => {
 };
 
 export const AuthContextProvider = ({ children }) => {
+  console.log('Authhhh');
   const [authUser, setAuthUser] = useState(() => {
     const token = localStorage.getItem("token") || sessionStorage.getItem("token")
-    return token ? JSON.parse(token) : null;
+    return token ? token : null;
   }
   );
 
