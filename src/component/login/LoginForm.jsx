@@ -40,7 +40,7 @@ function LoginForm() {
     <div className="bg-white flex flex-col justify-center items-center ">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="border rounded-lg shadow-md flex flex-col text-black  gap-8 justify-center items-center pb-12  md:py-16  lg:py-24 px-20 lg:px-20 md:px-8"
+        className="md:border md:rounded-lg md:shadow-md flex flex-col text-black  gap-8 justify-center items-center pb-12  md:py-16  lg:py-24  lg:px-20 px-8"
       >
         <div className="flex flex-col md:gap-4 gap-1">
           <div className="md:hidden flex flex-col scale-50 justify-start items-center">
