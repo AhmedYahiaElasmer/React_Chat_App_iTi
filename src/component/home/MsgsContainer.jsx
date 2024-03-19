@@ -1,11 +1,12 @@
 import ChatBar from "../messages/ChatBar";
 import ChatNavBar from "../messages/ChatNavBar";
 import { Outlet } from "react-router-dom";
+import './Nav.css'
 const MsgsContainer = () => {
   return (
-    <div className="bg-msg-container  h-screen text-white ">
+    <div className="background h-screen text-white">
       {/* navbar */}
-      <ChatNavBar />
+      <ChatNavBar className='nav'/>
       {/* msg-container */}
       <div className="px-4  flex-1 flex flex-col overflow  w-full ">
         <Outlet />
