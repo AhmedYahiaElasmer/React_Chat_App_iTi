@@ -13,7 +13,7 @@ const AllUsers = () => {
       try {
         const token = sessionStorage.getItem("token");
         const header = {
-          Authorization: `Bearer ${token.substr(1, token.length - 2)}`,
+          Authorization: `Bearer ${token}`,
         };
         const response = await axios.get(
           "https://chat-app-backend-x0hh.onrender.com/api/v1/user",
@@ -34,17 +34,19 @@ const AllUsers = () => {
   }, [setAllUsers]);
 
   return (
-    <div className="p-5 ">
-      {console.log(allUsers)}
-      <h4 className="font-medium pb-4">All Users</h4>
-      <div className="flex flex-col overflow-y-scroll h-screen items-start overflow-auto gap-5">
-        {users.map((user) => (
-          <Link key={user._id} to={`/home/userchat/${user._id}`}>
-            <User user={user} />
-          </Link>
-        ))}
+    <>
+      <div className="p-5 ">
+        {console.log(allUsers)}
+        <h4 className="font-medium pb-4">All Users</h4>
+        <div className="flex flex-col overflow-y-scroll h-screen items-start overflow-auto gap-5">
+          {users.map((user) => (
+            <Link key={user._id} to={`/home/userchat/${user._id}`}>
+              <User user={user} />
+            </Link>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
