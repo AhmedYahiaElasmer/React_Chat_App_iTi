@@ -13,7 +13,7 @@ const AllUsers = () => {
     const abortCtrl = new AbortController();
     const fetchData = async () => {
       try {
-        const token = sessionStorage.getItem("token");
+        const token = sessionStorage.getItem("token") || localStorage.getItem("token");
         const header = {
           Authorization: `Bearer ${token}`,
         };
