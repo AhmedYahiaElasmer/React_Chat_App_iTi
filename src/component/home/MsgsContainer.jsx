@@ -1,6 +1,7 @@
 import ChatBar from "../messages/ChatBar";
 import ChatNavBar from "../messages/ChatNavBar";
 import { Outlet } from "react-router-dom";
+
 const MsgsContainer = () => {
   return (
     <div className="bg-msg-container  h-screen text-white ">

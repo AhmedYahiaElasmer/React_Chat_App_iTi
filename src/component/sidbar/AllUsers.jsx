@@ -1,43 +1,12 @@
-import { useEffect, useState } from "react";
 import User from "../users/User";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import useAllUsers from "../../zustand/UseConversation";
 import useRequest from "../../hooks/useRequest";
-import useAuth from "../../hooks/useAuth";
+import { useChats, useAllUsers } from "../../zustand/zustand";
+
 const AllUsers = () => {
-  const { allUsers, setAllUsers } = useAllUsers();
-  const { data_, loading_, error, requestApi } = useRequest();
-  const { getAuthUser } = useAuth();
-
-  useEffect(() => {
-    const abortCtrl = new AbortController();
-    const fetchData = async () => {
-      try {
-        const token = getAuthUser();
-        const header = {
-          Authorization: `Bearer ${token}`,
-        };
-
-        const response = await requestApi("/user", {
-          method: "GET",
-          headers: header,
-          signal: abortCtrl.signal,
-        });
-
-        if (!response?.users) return;
-
-        const usersData = response.users;
-        setAllUsers(usersData);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    };
-
-    fetchData();
-    return () => abortCtrl.abort();
-  }, [setAllUsers]);
-
+  const { allUsers } = useAllUsers();
+  const { allChats } = useChats();
+  const { loading_ } = useRequest();
   return (
     <>
       {loading_ ? (

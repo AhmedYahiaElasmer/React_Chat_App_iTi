@@ -1,13 +1,21 @@
 import { create } from "zustand";
 
-// export const UseConversation = create((set) => ({
+// export const useConversation = create((set) => ({
 //   selectedConversation: null,
 //   setSelectedConversation: (selectedConversation) =>
 //     set({ selectedConversation }),
 //   messages: [],
 //   setMessages: (messages) => set({ messages }),
 // }));
-const useAllUsers = create((set) => ({
+export const useChats = create((set) => ({
+  allChats: [],
+  setAllChats: (AllChats) => {
+    console.log("Updating AllChats:", AllChats);
+    set(AllChats);
+  },
+}));
+
+export const useAllUsers = create((set) => ({
   allUsers: [],
   setAllUsers: (users) => {
     console.log("Updating allUsers:", users); // Log when allUsers is being updated
@@ -15,4 +23,3 @@ const useAllUsers = create((set) => ({
   },
 }));
 useAllUsers.subscribe((state) => console.log("allUsers:", state.allUsers));
-export default useAllUsers;
