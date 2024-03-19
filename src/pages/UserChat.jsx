@@ -1,5 +1,11 @@
+import Message from "../component/messages/Message";
+
 function UserChat() {
-  return <div>UserChat</div>;
+  return (
+    <>
+      <Message />
+    </>
+  );
 }
 
 export default UserChat;

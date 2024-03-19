@@ -1,9 +1,12 @@
-
 import { useForm } from "react-hook-form";
 import useLogin from "../../hooks/useLogin";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faGoogle, faXTwitter } from "@fortawesome/free-brands-svg-icons";
+import {
+  faGithub,
+  faGoogle,
+  faXTwitter,
+} from "@fortawesome/free-brands-svg-icons";
 import BlackLogo from "../logo/BlackLogo";
 
 function LoginForm() {
@@ -15,18 +18,20 @@ function LoginForm() {
   const { loading, login } = useLogin();
 
   const onSubmit = async (data) => {
-    await login(data.email, data.password,data.rememberMe);
+    await login(data.email, data.password, data.rememberMe);
     console.log(data);
   };
 
   return (
-    <div className="bg-white flex flex-col justify-center items-center">
+    <div className="bg-white flex flex-col justify-center items-center ">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="border rounded-lg shadow-md flex flex-col text-black  gap-8 justify-center items-center pb-12  md:py-16  lg:py-24 px-20 lg:px-20 md:px-8"
       >
         <div className="flex flex-col md:gap-4 gap-1">
-          <div className="md:hidden flex flex-col scale-50 justify-start items-center"><BlackLogo/> </div>
+          <div className="md:hidden flex flex-col scale-50 justify-start items-center">
+            <BlackLogo />{" "}
+          </div>
           <h2 className="text-2xl font-bold">Back to your world</h2>
           <p>Choose one of the options to go</p>
         </div>
@@ -55,14 +60,17 @@ function LoginForm() {
                 id="rememberMe"
                 {...register("rememberMe")}
               />
-              <label htmlFor="rememberMe" className="text-zinc-600 align-top text-xs md:text-sm">
+              <label
+                htmlFor="rememberMe"
+                className="text-zinc-600 align-top text-xs md:text-sm"
+              >
                 Remember Me
               </label>
             </div>
             <p className="text-zinc-600 text-xs md:text-sm">Forgot password?</p>
           </div>
         </div>
-      
+
         <div className="flex justify-between w-full">
           <div className="bg-gray-100 py-3 md:px-8 px-5 rounded-md btnhover hover:text-white">
             <FontAwesomeIcon icon={faGithub} className="text-3xl " />
@@ -73,7 +81,6 @@ function LoginForm() {
           <div className="bg-gray-100 py-3 md:px-8 px-5 rounded-md btnhover hover:text-white">
             <FontAwesomeIcon icon={faXTwitter} className="text-3xl " />
           </div>
-       
         </div>
         <div>
           <button
@@ -87,7 +94,7 @@ function LoginForm() {
             )}
           </button>
           <p>
-            Don’t have an account?{" "}
+            Don’t have an account?
             <span>
               <Link className="font-grad font-medium" to={"/register"}>
                 Sign up

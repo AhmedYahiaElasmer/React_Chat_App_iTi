@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useAuthContext } from "./context/AuthContext";
 import { Navigate } from "react-router-dom/dist";
+import Error from "./pages/Error";
 
 function App() {
   const { authUser } = useAuthContext();
@@ -23,6 +24,7 @@ function App() {
           path="/home/*"
           element={authUser ? <Home /> : <Navigate to={"/"} />}
         />
+        <Route path="*" element={<Error />} />
       </Routes>
 
       {/* <Login />
