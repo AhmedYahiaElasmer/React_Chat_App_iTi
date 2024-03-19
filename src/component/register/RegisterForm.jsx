@@ -9,6 +9,7 @@ import { UplaodFile } from "../../utils/uploadimage";
 import Avatar from "../Avatar";
 import { signUp } from "../../api/auth";
 
+
 function RegisterForm() {
   const [fileUpload, onFileUpload] = useState("");
 
@@ -23,33 +24,38 @@ function RegisterForm() {
     }
   };
 
+
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors, dirtyFields },
+    formState: { errors, dirtyFields },  
   } = useForm({
-    mode: "onChange",
+    mode:"onChange"
   });
   const password = useRef({});
   password.current = watch("password", "");
 
-  const onSubmit = async (data) => {
-    let urlFile = ""; //image Url back from Firebase
+  const onSubmit =  async (data) => {
+    let urlFile=""; //image Url back from Firebase
     console.log(data);
-    const { fristName, password, email, lastName } = data;
+    const {fristName , password ,email , lastName} = data
+
 
     if (fileUpload) urlFile = await UplaodFile("avatar", fileUpload);
 
-    const signUp_ = await signUp({
-      firstname: fristName,
-      lastname: lastName,
+    
+    const signUp_ = await  signUp({
+      firstname:fristName,
+      lastname:lastName,
+      gender:"male",
       email,
       password,
-      image: urlFile,
-    });
+      image:urlFile
+    })
 
-    console.log({ signUp_, urlFile });
+    
+    console.log({signUp_ ,urlFile });
   };
 
   return (
@@ -69,18 +75,18 @@ function RegisterForm() {
       <div className="p-4 bg-black bgc">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="  flex flex-col text-white gap-8 justify-center items-center py-16 px-24"
+          className="  flex flex-col text-white gap-6 justify-center items-center px-12  lg:px-16 lg:scale-95 scale-90 md:scale-75"
         >
-          <div className="flex flex-col gap-4 items-center ">
+          <div className="flex flex-col  justify-center gap-3 items-center ">
             <h1 className="text-2xl font-extrabold">Create new account</h1>
-            <Avatar onFileUpload={onFileUpload} />
+            <Avatar onFileUpload={onFileUpload}  />
           </div>
           <div className="flex flex-col  ">
             <div className="flex gap-6  ">
               <div className="flex flex-col  ">
                 <label htmlFor="fristName" className="w-auto">
                   First Name
-                  <Required error={errors.fristName} />
+                  <Required error={errors.fristName}/>
                 </label>
                 <input
                   {...register("fristName", {
@@ -98,10 +104,10 @@ function RegisterForm() {
                   type="text"
                   className={
                     errors.fristName
-                      ? "outline-red-600 input input-bordered bg-transparent   w-auto "
+                      ? "outline-red-600 input input-bordered bg-transparent h-10  w-auto "
                       : `${
                           dirtyFields?.fristName ? "outline-green-600" : ""
-                        }  input input-bordered bg-transparent   w-auto`
+                        }  input input-bordered bg-transparent h-10  w-auto`
                   }
                 />
                 {/* {console.log(dirtyFields?.fristName)} */}
@@ -129,10 +135,10 @@ function RegisterForm() {
                   type="text"
                   className={
                     errors.lastName
-                      ? "outline-red-600 input input-bordered bg-transparent   w-auto "
+                      ? "outline-red-600 input input-bordered bg-transparent  h-10 w-auto "
                       : `${
                           dirtyFields?.lastName ? "outline-green-600" : ""
-                        }  input input-bordered bg-transparent   w-auto`
+                        }  input input-bordered bg-transparent h-10  w-auto`
                   }
                 />
 
@@ -143,7 +149,7 @@ function RegisterForm() {
             </div>
 
             <label htmlFor="email" className="w-auto">
-              E-mail <Required error={errors.email} />
+              E-mail <Required error={errors.email}/>
             </label>
 
             <input
@@ -158,17 +164,17 @@ function RegisterForm() {
               type="email"
               className={
                 errors.email
-                  ? "outline-red-600 input input-bordered bg-transparent   w-auto "
+                  ? "outline-red-600 input input-bordered bg-transparent h-10  w-auto "
                   : `${
                       dirtyFields?.email ? "outline-green-600" : ""
-                    }  input input-bordered bg-transparent   w-auto`
+                    }  input input-bordered bg-transparent  h-10 w-auto`
               }
             />
 
             <span className="text-red-600 h-7">{errors.email?.message}</span>
 
             <label htmlFor="password" className="w-auto">
-              Password <Required error={errors.password} />
+              Password <Required error={errors.password}/>
             </label>
             <input
               {...register("password", {
@@ -195,10 +201,10 @@ function RegisterForm() {
               type="password"
               className={
                 errors?.password
-                  ? "outline-red-600 input input-bordered bg-transparent   w-auto "
+                  ? "outline-red-600 input input-bordered bg-transparent h-10  w-auto "
                   : `${
                       dirtyFields?.password ? "outline-green-600" : ""
-                    }  input input-bordered bg-transparent   w-auto`
+                    }  input input-bordered bg-transparent  h-10 w-auto`
               }
             />
 
@@ -214,7 +220,7 @@ function RegisterForm() {
               )}
             </div>
             <label htmlFor="Re-password" className="w-auto">
-              Re-Password <Required error={errors.Repassword} />
+              Re-Password <Required error={errors.Repassword}/>
             </label>
             <input
               {...register("Repassword", {
@@ -226,10 +232,10 @@ function RegisterForm() {
               type="password"
               className={
                 errors?.Repassword
-                  ? "outline-red-600 input input-bordered bg-transparent   w-auto "
+                  ? "outline-red-600 input input-bordered bg-transparent h-10  w-auto "
                   : `${
                       dirtyFields?.Repassword ? "outline-green-600" : ""
-                    }  input input-bordered bg-transparent   w-auto`
+                    }  input input-bordered bg-transparent h-10  w-auto`
               }
             />
 
@@ -242,7 +248,7 @@ function RegisterForm() {
           <div>
             <button
               type="submit"
-              className="btn  btn-wide text-white bg-transparent  border-white	 hover:bg-grad-color "
+              className="btn  btn-wide text-white bg-transparent  border-white	scale-110 hover:bg-grad-color "
             >
               Sign Up
             </button>
@@ -250,8 +256,8 @@ function RegisterForm() {
           <div className="flex justify-between lg:gap-20 md:gap-5 ">
             <p>
               Already a member?
-              <Link to="" className="link   font-grad link-hover ">
-                Sign in
+              <Link to="/" className="link font-bold  font-grad link-hover ">
+                Log in
               </Link>
             </p>
           </div>
