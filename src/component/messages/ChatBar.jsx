@@ -1,5 +1,7 @@
 import { BsSend } from "react-icons/bs";
+import useAuth from "../../hooks/useAuth";
 const ChatBar = () => {
+  const {removeAuthUser} = useAuth();
   return (
     <>
       <form className="px-4 my-3 ">
@@ -10,7 +12,8 @@ const ChatBar = () => {
             placeholder="Send a message"
           />
           <button
-            type="submit"
+          onClick={() => {removeAuthUser()}}
+            type="button"
             className="absolute inset-y-0 end-0 flex items-center pe-3"
           >
             {/* {loading ? <div className='loading loading-spinner'></div> : <BsSend />} */}

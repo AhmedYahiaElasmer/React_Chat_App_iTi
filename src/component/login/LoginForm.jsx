@@ -8,8 +8,11 @@ import {
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import BlackLogo from "../logo/BlackLogo";
+import useRequest from "../../hooks/useRequest";
 
 function LoginForm() {
+  const{loading_ , data_ , error , requestApi } = useRequest();
+
   const {
     register,
     handleSubmit,
@@ -18,9 +21,20 @@ function LoginForm() {
   const { loading, login } = useLogin();
 
   const onSubmit = async (data) => {
+    //  requestApi("/auth/login",{
+    //   method:"POST",
+    //   data:{
+    //     email:data.email,
+    //     password:data.password
+    //   }
+    // })
     await login(data.email, data.password, data.rememberMe);
+    
+
     console.log(data);
   };
+
+ 
 
   return (
     <div className="bg-white flex flex-col justify-center items-center ">
