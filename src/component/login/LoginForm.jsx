@@ -99,9 +99,9 @@ function LoginForm() {
         <div>
           <button
             className="btn btn-wide bg-black text-white btnhover"
-            disabled={loading_}
+            disabled={loading}
           >
-            {loading_ ? (
+            {loading ? (
               <span className="loading loading-spinner"></span>
             ) : (
               "Log in"

@@ -4,16 +4,18 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import useAllUsers from "../../zustand/UseConversation";
 import useRequest from "../../hooks/useRequest";
+import useAuth from "../../hooks/useAuth";
 const AllUsers = () => {
   
   const { allUsers, setAllUsers } = useAllUsers();
-  const {data_ , loading_ , error , requestApi} = useRequest()
+  const {data_ , loading_ , error , requestApi} = useRequest();
+  const {getAuthUser} = useAuth();
 
   useEffect(() => {
     const abortCtrl = new AbortController();
     const fetchData = async () => {
       try {
-        const token = sessionStorage.getItem("token") || localStorage.getItem("token");
+        const token = getAuthUser();
         const header = {
           Authorization: `Bearer ${token}`,
         };

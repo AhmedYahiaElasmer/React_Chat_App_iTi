@@ -12,10 +12,8 @@ export default function useRequest() {
         setLoading(true);
         try {
             response = (await instance(url,options)).data
-            console.log("req");
             setData(response);
         } catch (error) {
-            // console.log("GG");
             setError(error);
         }
         setLoading(false);
