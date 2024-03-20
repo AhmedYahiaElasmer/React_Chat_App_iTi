@@ -12,13 +12,13 @@ const AllUsers = () => {
       {loading_ ? (
         <div>Loading...</div>
       ) : (
-        <div className="p-5 ">
+        <div className="p-5 w-full col-span-2">
           {/* {
         console.log({data_})
       } */}
           {/* {console.log(allUsers)} */}
           <h4 className="font-medium pb-4">All Users</h4>
-          <div className="flex flex-col overflow-y-scroll h-screen items-start overflow-auto gap-5">
+          <div className="flex flex-col scrollbar style={{ height: '200px' }} h-screen items-start overflow-auto gap-5">
             {allUsers.map((user) => (
               <Link key={user._id} to={`/home/userchat/${user._id}`}>
                 <User user={user} />

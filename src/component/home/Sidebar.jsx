@@ -1,7 +1,7 @@
 import SearchBar from "../sidbar/SearchBar";
 import Toggle_User_Group from "../sidbar/Toggle_User_Group";
 import SidBarHeader from "../sidbar/SidBarHeader";
-import AllUsers from "../sidbar/AllUsers";
+// import AllUsers from "../sidbar/AllUsers";
 
 const Sidebar = () => {
   return (
@@ -9,7 +9,7 @@ const Sidebar = () => {
       <SidBarHeader />
       <SearchBar />
       <Toggle_User_Group />
-      <AllUsers />
+      {/* <AllUsers /> */}
     </div>
   );
 };
