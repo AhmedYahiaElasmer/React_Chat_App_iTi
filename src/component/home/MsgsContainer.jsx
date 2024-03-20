@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import ChatBar from "../messages/ChatBar";
 import ChatNavBar from "../messages/ChatNavBar";
 import { Outlet } from "react-router-dom";
@@ -19,13 +19,16 @@ const MsgsContainer = () => {
     </div>
   );
   // return (
-  // 	<div className='flex items-center justify-center w-full h-full bg-msg-container'>
-  // 		<div className='px-4 text-center sm:text-lg md:text-xl text-stone-500  flex flex-col justify-center items-center gap-6'>
-  //       <GrayLogo/>
-  // 			<h4 className="text-5xl tracking-[.4rem] font-semibold">TYPING....</h4>
-  // 			<p className="text-stone-300 text-3xl tracking-[.2rem] font-normal">Click to any user to start chat !</p>
-  // 		</div>
-  // 	</div>)
+  //   <div className="flex items-center justify-center w-full h-full bg-msg-container">
+  //     <div className="px-4 text-center sm:text-lg md:text-xl text-stone-500  flex flex-col justify-center items-center gap-6">
+  //       <GrayLogo />
+  //       <h4 className="text-5xl tracking-[.4rem] font-semibold">TYPING....</h4>
+  //       <p className="text-stone-300 text-3xl tracking-[.2rem] font-normal">
+  //         Click to any user to start chat !
+  //       </p>
+  //     </div>
+  //   </div>
+  // );
 };
 export default MsgsContainer;
 
