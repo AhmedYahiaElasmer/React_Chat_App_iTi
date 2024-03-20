@@ -3,7 +3,9 @@ import Message from "../component/messages/Message";
 function UserChat() {
   return (
     <>
-      <Message />
+      <div className="flex flex-col ">
+        <Message />
+      </div>
     </>
   );
 }

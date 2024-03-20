@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import Sidebar from "../component/home/Sidebar";
 import MsgsContainer from "../component/home/MsgsContainer";
 import UserChat from "./UserChat";
@@ -7,9 +7,8 @@ import ChatRoom from "./ChatRoom";
 import { useAllUsers, useChats } from "../zustand/zustand";
 import useRequest from "../hooks/useRequest";
 import useAuth from "../hooks/useAuth";
-import { useEffect } from "react";
-import Drawer from '../component/home/Drawer'
-import './auth.css'
+import Drawer from "../component/home/Drawer";
+import "./auth.css";
 
 const Auth = () => {
   const { setAllUsers } = useAllUsers();
@@ -60,10 +59,10 @@ const Auth = () => {
       setIsScreenSmall(window.innerWidth <= 900);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
