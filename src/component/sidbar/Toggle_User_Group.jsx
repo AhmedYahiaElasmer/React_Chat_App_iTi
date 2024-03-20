@@ -21,9 +21,8 @@ const Toggle_User_Group = () => {
         onClick={() => handleTabClick("users")}
         style={{
           borderBottom: selectedTab === "users" ? "2px solid white" : "none",
-          fontWeight: selectedTab === "users" ? "600" : "100"
+          fontWeight: selectedTab === "users" ? "600" : "100",
         }}
-                
       >
         <span>
           <FontAwesomeIcon icon={faUserFriends} className="text-xl" />
@@ -37,7 +36,7 @@ const Toggle_User_Group = () => {
         onClick={() => handleTabClick("chats")}
         style={{
           borderBottom: selectedTab === "chats" ? "2px solid white" : "none",
-          fontWeight: selectedTab === "chats" ? "600" : "100"
+          fontWeight: selectedTab === "chats" ? "600" : "100",
         }}
       >
         <span>
@@ -45,7 +44,11 @@ const Toggle_User_Group = () => {
         </span>
         <p>Chats</p>
       </div>
-      {selectedTab === "users" ? <AllUsers/> : <AllUsers/>}
+      {selectedTab === "users" ? (
+        <AllUsers isChat={false} />
+      ) : (
+        <AllUsers isChat={true} />
+      )}
     </div>
   );
 };

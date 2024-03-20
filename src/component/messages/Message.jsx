@@ -1,47 +1,33 @@
+import useAuth from "../../hooks/useAuth";
+import { useConversation } from "../../zustand/zustand";
 import Resever from "./Resever";
 import Sender from "./Sender";
-import useRequest from "../../hooks/useRequest";
-import useAuth from "../../hooks/useAuth";
-import { useEffect } from "react";
+
 const Message = () => {
-  const { requestApi } = useRequest();
+  const {
+    messages,
+    setMessages,
+    selectedConversation,
+    setSelectedConversation,
+  } = useConversation();
   const { getAuthUser } = useAuth();
-  useEffect(() => {
-    const abortCtrl = new AbortController();
-    const fetchData = async () => {
-      try {
-        const token = getAuthUser();
-        const header = {
-          Authorization: `Bearer ${token}`,
-        };
+  const user = JSON.parse(getAuthUser("user"));
 
-        const response = await requestApi(
-          `/message?chat_=65f881050eed46dfed8cce57&page_=0`,
-          {
-            method: "GET",
-            headers: header,
-            signal: abortCtrl.signal,
-          }
-        );
-
-        if (!response) return;
-
-        const chatData = response;
-        console.log(chatData);
-        console.log(chatData);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    };
-
-    fetchData();
-    return () => abortCtrl.abort();
-  }, []);
+  // console.log(user._id);
+  // setMessages("");
 
   return (
     <>
-      <Resever />
-      <Sender />
+      {messages.map((message) => (
+        <>
+          {console.log(user._id === message.sender._id)}
+          {user._id === message.sender._id ? (
+            <Sender key={message.sender} message={message.sender} />
+          ) : (
+            <Resever key={message._id} />
+          )}
+        </>
+      ))}
     </>
   );
 };

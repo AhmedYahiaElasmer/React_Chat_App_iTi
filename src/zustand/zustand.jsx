@@ -1,26 +1,29 @@
 import { create } from "zustand";
 
 export const useConversation = create((set) => ({
-  selectedConversation: null,
+  selectedConversation: [],
   setSelectedConversation: (selectedConversation) =>
     set({ selectedConversation }),
   messages: [],
-  setMessages: (messages) => set({ messages }),
+  setMessages: (messages) => {
+    console.log("Updating messages:", messages);
+    set({ messages });
+  },
 }));
 
 export const useChats = create((set) => ({
   allChats: [],
-  setAllChats: (AllChats) => {
-    console.log("Updating AllChats:", AllChats);
-    set(AllChats);
+  setAllChats: (allChats) => {
+    // console.log("Updating AllChats:", allChats);
+    set({ allChats });
   },
 }));
 
 export const useAllUsers = create((set) => ({
   allUsers: [],
   setAllUsers: (users) => {
-    console.log("Updating allUsers:", users); // Log when allUsers is being updated
+    // console.log("Updating allUsers:", users); // Log when allUsers is being updated
     set({ allUsers: users });
   },
 }));
-useAllUsers.subscribe((state) => console.log("allUsers:", state.allUsers));
+// useAllUsers.subscribe((state) => console.log("allUsers:", state.allUsers));
