@@ -9,17 +9,24 @@ import useRequest from "../hooks/useRequest";
 import useAuth from "../hooks/useAuth";
 import Drawer from "../component/home/Drawer";
 import "./auth.css";
+import { connectionSocket } from "../utils/socketMethods";
 
 const Auth = () => {
+  const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 900);
+
   const { setAllUsers } = useAllUsers();
   const { setAllChats, allChats } = useChats();
   const { requestApi } = useRequest();
   const { getAuthUser } = useAuth();
+
+  const userId = JSON.parse(getAuthUser("user"))._id;
+  // console.log(JSON.parse(getAuthUser("user"))._id);
+
   useEffect(() => {
     const abortCtrl = new AbortController();
     const fetchData = async () => {
       try {
-        const token = getAuthUser();
+        const token = getAuthUser("token");
         const header = {
           Authorization: `Bearer ${token}`,
         };
@@ -52,17 +59,17 @@ const Auth = () => {
     return () => abortCtrl.abort();
   }, []);
 
-  const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 900);
-
   useEffect(() => {
     const handleResize = () => {
       setIsScreenSmall(window.innerWidth <= 900);
     };
 
     window.addEventListener("resize", handleResize);
-
+    const socketConnection = connectionSocket();
+    socketConnection.emit("addUser", userId);
     return () => {
       window.removeEventListener("resize", handleResize);
+      socketConnection.disconnect();
     };
   }, []);
 

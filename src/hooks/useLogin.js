@@ -18,6 +18,7 @@ const useLogin = () => {
       );
       console.log(response);
       const data = JSON.stringify(response.data);
+      setAuthUser_(JSON.stringify(response.data.data),rememberMe, "user");
       if (data.error) {
         throw new Error(data.error);
       } else {
