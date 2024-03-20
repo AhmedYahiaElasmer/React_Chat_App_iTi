@@ -1,0 +1,10 @@
+.background{
+    background: linear-gradient(#181818,#3d3d3d ) !important;
+}
+.menu-icon {
+    background-color: transparent !important;
+  }
+  .position{
+    position: absolute;
+    bottom: 0% !important;
+  }
