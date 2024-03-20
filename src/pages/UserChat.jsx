@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // import Message from "../component/messages/Message";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useRequest from "../hooks/useRequest";
 import useAuth from "../hooks/useAuth";
 import { useConversation } from "../zustand/zustand";
@@ -12,6 +12,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 function UserChat() {
   const { requestApi } = useRequest();
   const { getAuthUser } = useAuth();
+  const [page, setPage] = useState(0);
   const user = JSON.parse(getAuthUser("user"));
   const {
     // messages,
@@ -20,8 +21,13 @@ function UserChat() {
     setSelectedConversation,
   } = useConversation();
   let { id } = useParams();
+  // let { page } = useParams();
   // console.log(id);
-  let fetchData = () => {};
+  let fetchData;
+  let fetchaa = () => {
+    // setPage(page + 1);
+    console.log("fetchData fetchData");
+  };
   useEffect(() => {
     const abortCtrl = new AbortController();
     fetchData = async () => {
@@ -32,11 +38,14 @@ function UserChat() {
           Authorization: `Bearer ${token}`,
         };
 
-        const response = await requestApi(`/message?chat_=${id}&page_=0`, {
-          method: "GET",
-          headers: header,
-          signal: abortCtrl.signal,
-        });
+        const response = await requestApi(
+          `/message?chat_=${id}&page_=${page}`,
+          {
+            method: "GET",
+            headers: header,
+            signal: abortCtrl.signal,
+          }
+        );
 
         if (!response) return;
 
@@ -60,22 +69,22 @@ function UserChat() {
     }
 
     return () => abortCtrl.abort();
-  }, [id]);
+  }, [id, page]);
   // console.log("selectedConversation", selectedConversation);
   return (
     <>
       <InfiniteScroll
         dataLength={10}
-        next={fetchData()}
-        // hasMore={true}
-        // loader={<h4>Loading...</h4>}
+        next={fetchaa}
+        hasMore={true}
+        loader={<h4 className="text-red-600">Loading...</h4>}
       >
-        {" "}
+        {console.log(fetchData)}
         <div className="flex flex-col ">
           {selectedConversation[
             selectedConversation.findIndex((chat) => chat.chat_ === id)
           ]?.messages[0].map((message) => (
-            <div key={message?._id}>
+            <div key={message?._id} className="">
               {user._id === message?.sender?._id ? (
                 <Sender message={message} />
               ) : (
