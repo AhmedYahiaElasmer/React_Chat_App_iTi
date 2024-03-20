@@ -9,6 +9,7 @@ import useRequest from "../hooks/useRequest";
 import useAuth from "../hooks/useAuth";
 import Drawer from '../component/home/Drawer'
 import './auth.css'
+import { connectionSocket } from "../utils/socketMethods";
 
 const Auth = () => {
   const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 900);
@@ -17,6 +18,9 @@ const Auth = () => {
   const { setAllChats, allChats } = useChats();
   const { requestApi } = useRequest();
   const { getAuthUser } = useAuth();
+
+  const userId=JSON.parse(getAuthUser("user"))._id
+// console.log(JSON.parse(getAuthUser("user"))._id);
 
   
   useEffect(() => {
@@ -63,10 +67,15 @@ const Auth = () => {
     };
 
     window.addEventListener('resize', handleResize);
-
+    const socketConnection=connectionSocket();
+    socketConnection.emit("addUser",userId);
     return () => {
       window.removeEventListener('resize', handleResize);
+      socketConnection.disconnect();
+      
     };
+
+    
   }, []);
 
   return (
