@@ -7,20 +7,23 @@ import ChatRoom from "./ChatRoom";
 import { useAllUsers, useChats } from "../zustand/zustand";
 import useRequest from "../hooks/useRequest";
 import useAuth from "../hooks/useAuth";
-import { useEffect } from "react";
 import Drawer from '../component/home/Drawer'
 import './auth.css'
 
 const Auth = () => {
+  const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 900);
+
   const { setAllUsers } = useAllUsers();
   const { setAllChats, allChats } = useChats();
   const { requestApi } = useRequest();
   const { getAuthUser } = useAuth();
+
+  
   useEffect(() => {
     const abortCtrl = new AbortController();
     const fetchData = async () => {
       try {
-        const token = getAuthUser();
+        const token = getAuthUser("token");
         const header = {
           Authorization: `Bearer ${token}`,
         };
@@ -53,8 +56,7 @@ const Auth = () => {
     return () => abortCtrl.abort();
   }, []);
 
-  const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 900);
-
+ 
   useEffect(() => {
     const handleResize = () => {
       setIsScreenSmall(window.innerWidth <= 900);
