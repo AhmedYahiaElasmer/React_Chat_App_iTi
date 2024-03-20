@@ -4,25 +4,19 @@
 import Avatar from "../Avatar";
 
 const User = (props) => {
-  const {
-    user,
-    userName,
-    lastMassge = "true",
-    initImage = "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg",
-  } = props;
+  const { user, isChat = false, initImage = user.image } = props;
   // console.log(user);
   return (
     <div className="chat chat-start">
       <Avatar isMessage={true} initImage={initImage} />
       <div className="chat-header">
-        {user.firstname}
-        {user.lastname}
-        {lastMassge ? (
+        {isChat
+          ? user?.name
+          : `${user?.firstname} ${user.lastname ? user.lastname : ""}`}
+
+        {isChat ? (
           <div className=" opacity-80 w-40 h-5 chat-footer  overflow-hidden truncate ">
-            last Massage Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Autem at eum impedit quam, modi neque. Porro quae quos sit
-            vero error at dolorum eligendi? Laboriosam illo harum eius officiis
-            mollitia.
+            {user.latestMessage?.content}
           </div>
         ) : (
           ""

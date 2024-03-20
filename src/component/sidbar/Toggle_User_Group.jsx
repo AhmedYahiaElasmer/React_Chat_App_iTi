@@ -45,7 +45,11 @@ const Toggle_User_Group = () => {
         </span>
         <p>Chats</p>
       </div>
-      {selectedTab === "users" ? <AllUsers/> : <AllUsers/>}
+      {selectedTab === "users" ? (
+        <AllUsers isChat={false} />
+      ) : (
+        <AllUsers isChat={true} />
+      )}
     </div>
   );
 };

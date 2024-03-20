@@ -1,50 +1,49 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import User from "../users/User";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import useAllUsers from "../../zustand/UseConversation";
-const AllUsers = () => {
-  const [loading, setLoading] = useState(true);
-  const [users, setusers] = useState([]);
-  const { allUsers, setAllUsers } = useAllUsers();
+import useRequest from "../../hooks/useRequest";
+import { useChats, useAllUsers } from "../../zustand/zustand";
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = sessionStorage.getItem("token");
-        const header = {
-          Authorization: `Bearer ${token.substr(1, token.length - 2)}`,
-        };
-        const response = await axios.get(
-          "https://chat-app-backend-x0hh.onrender.com/api/v1/user",
-          { headers: header }
-        );
-        const usersData = response.data.users;
-        setAllUsers(usersData);
-
-        setusers(usersData);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [setAllUsers]);
-
+const AllUsers = (props) => {
+  const { isChat } = props;
+  const { allUsers } = useAllUsers();
+  const { allChats } = useChats();
+  const { loading_ } = useRequest();
+  // console.log(allChats);
   return (
-    <div className="p-5 w-full col-span-2">
-      {console.log(allUsers)}
-      <h4 className="font-medium pb-4">All Users</h4>
-      <div className="flex flex-col scrollbar style={{ height: '200px' }} h-screen items-start overflow-auto gap-5">
-        {users.map((user) => (
-          <Link key={user._id} to={`/home/userchat/${user._id}`}>
-            <User user={user} />
-          </Link>
-        ))}
-      </div>
-    </div>
+    <>
+      {loading_ ? (
+        <div>Loading...</div>
+      ) : (
+        <div className="p-5 w-full col-span-2">
+          {/* {
+        console.log({data_})
+      } */}
+          {/* {console.log(allUsers)} */}
+          <h4 className="font-medium pb-4">All Users</h4>
+          <div className="flex flex-col scrollbar style={{ height: '200px' }} h-screen items-start overflow-auto gap-5">
+            {isChat ? (
+              <>
+                {allChats.map((chat) => (
+                  <Link key={chat._id} to={`/home/userchat/${chat._id}`}>
+                    <User user={chat} isChat={isChat} />
+                  </Link>
+                ))}
+              </>
+            ) : (
+              <>
+                {allUsers.map((user) => (
+                  <Link key={user._id} to={`/home/userchat/${user._id}`}>
+                    <User user={user} isChat={isChat} />
+                  </Link>
+                ))}
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

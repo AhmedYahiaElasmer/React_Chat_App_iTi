@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import { useAuthContext } from "./context/AuthContext";
 import { Navigate } from "react-router-dom/dist";
 import Error from "./pages/Error";
+import Toaster from "react-hot-toast"
 import HeroPage from "./pages/Hero";
 
 function App() {
@@ -27,10 +28,8 @@ function App() {
         />
         <Route path="*" element={<Error />} />
       </Routes>
-
-      {/* <Login />
-      <Register /> */}
-    </>
+    
+</>
   );
 }
 
