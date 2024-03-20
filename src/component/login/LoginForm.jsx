@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import useLogin from "../../hooks/useLogin";
 import { Link } from "react-router-dom";
+import { useGoogleLogin } from '@react-oauth/google'
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGithub,
@@ -9,7 +11,13 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import BlackLogo from "../logo/BlackLogo";
 
+
 function LoginForm() {
+  const googleLogin = useGoogleLogin({
+    onSuccess: Response => console.log(Response),
+    flow: 'auth-code',
+   
+  });
   const {
     register,
     handleSubmit,
@@ -72,15 +80,15 @@ function LoginForm() {
         </div>
 
         <div className="flex justify-between w-full">
-          <div className="bg-gray-100 py-3 md:px-8 px-5 rounded-md btnhover hover:text-white">
+          <button  className="bg-gray-100 py-3 md:px-8 px-5 rounded-md btnhover hover:text-white">
             <FontAwesomeIcon icon={faGithub} className="text-3xl " />
-          </div>
-          <div className="bg-gray-100 py-3 md:px-8 px-5 rounded-md btnhover hover:text-white">
+          </button>
+          <button onClick={() => googleLogin()} className="bg-gray-100 py-3 md:px-8 px-5 rounded-md btnhover hover:text-white">
             <FontAwesomeIcon icon={faGoogle} className="text-3xl " />
-          </div>
-          <div className="bg-gray-100 py-3 md:px-8 px-5 rounded-md btnhover hover:text-white">
+          </button>
+          <button className="bg-gray-100 py-3 md:px-8 px-5 rounded-md btnhover hover:text-white">
             <FontAwesomeIcon icon={faXTwitter} className="text-3xl " />
-          </div>
+          </button>
         </div>
         <div>
           <button
