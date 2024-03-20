@@ -15,6 +15,7 @@ const useLogin = () => {
         "https://chat-app-backend-x0hh.onrender.com/api/v1/auth/login",
         { email, password }
       );
+
       const data = JSON.stringify(response.data);
       if (data.error) {
         throw new Error(data.error);
@@ -25,8 +26,9 @@ const useLogin = () => {
           // console.log(data);
           // console.log(JSON.parse(data).token);
           const resData = JSON.parse(data);
-          sessionStorage.setItem("token", `"${resData.token}"`);
+          sessionStorage.setItem("token", `${response.data.token}`);
         }
+
         setAuthUser(data);
       }
     } catch (error) {
