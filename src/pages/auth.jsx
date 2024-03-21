@@ -41,6 +41,7 @@ const Auth = () => {
 
         const usersData = responseUser.users;
         setAllUsers(usersData);
+        console.log(allUsers);
         //////////////////////////////////////////////////////
         const responseChat = await requestApi(`/chat`, {
           method: "GET",

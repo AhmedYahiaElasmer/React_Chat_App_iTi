@@ -22,7 +22,7 @@ function UserChat() {
   } = useConversation();
 
   const { setAllChats, allChats } = useChats();
-  let { id ,user_ } = useParams();
+  let { id, user_ } = useParams();
   // console.log(user_);
   // let { page } = useParams();
   // console.log(id);
@@ -31,7 +31,6 @@ function UserChat() {
   //   // setPage(page + 1);
   //   console.log("fetchData fetchData");
   // };
-
 
   useEffect(() => {
     const abortCtrl = new AbortController();
@@ -43,29 +42,23 @@ function UserChat() {
           Authorization: `Bearer ${token}`,
         };
 
-        if(user_){
-          const response = await requestApi(
-            `/chat/privateChat/${user_}`,
-            {
-                method: "POST",
-                headers: header,
-                signal: abortCtrl.signal,
-            }
-          )
-          console.log(response);
-          id = response?.chat._id;
-          if(response?.chat){
-            setAllChats([...allChats,response.chat]);
-          }
-        }
-        const response = await requestApi(
-          `/message/getAllMessages/${id}`,
-          {
-            method: "GET",
+        if (user_) {
+          const response = await requestApi(`/chat/privateChat/${user_}`, {
+            method: "POST",
             headers: header,
             signal: abortCtrl.signal,
+          });
+          console.log(response);
+          id = response?.chat._id;
+          if (response?.chat) {
+            setAllChats([...allChats, response.chat]);
           }
-        );
+        }
+        const response = await requestApi(`/message/getAllMessages/${id}`, {
+          method: "GET",
+          headers: header,
+          signal: abortCtrl.signal,
+        });
 
         // console.log(response);
         if (!response) return;
@@ -78,7 +71,6 @@ function UserChat() {
             messages: [chatData],
           },
         ]);
-
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -88,7 +80,7 @@ function UserChat() {
     }
 
     return () => abortCtrl.abort();
-  }, [id,user_]);
+  }, [id, user_]);
   // console.log("selectedConversation", selectedConversation);
   return (
     <>
@@ -98,20 +90,20 @@ function UserChat() {
         hasMore={true}
         loader={<h4 className="text-red-600">Loading...</h4>}
       > */}
-        {/* {console.log(fetchData)} */}
-        <div className="flex flex-col ">
-          {selectedConversation[
-            selectedConversation.findIndex((chat) => chat.chat_ === id)
-          ]?.messages[0].map((message) => (
-            <div key={message?._id} className="">
-              {user._id === message?.sender?._id ? (
-                <Sender message={message} />
-              ) : (
-                <Resever message={message} />
-              )}
-            </div>
-          ))}
-        </div>
+      {/* {console.log(fetchData)} */}
+      <div className="flex flex-col ">
+        {selectedConversation[
+          selectedConversation.findIndex((chat) => chat.chat_ === id)
+        ]?.messages[0].map((message) => (
+          <div key={message?._id} className="">
+            {user._id === message?.sender?._id ? (
+              <Sender message={message} />
+            ) : (
+              <Resever message={message} />
+            )}
+          </div>
+        ))}
+      </div>
       {/* </InfiniteScroll> */}
       {/* {console.log(user._id === message.sender._id)} */}
     </>

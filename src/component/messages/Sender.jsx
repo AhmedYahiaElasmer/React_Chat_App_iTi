@@ -2,7 +2,7 @@
 import Avatar from "../Avatar";
 const Sender = (props) => {
   const { content } = props.message;
-  // console.log("message", message);
+  console.log("message", message);
   return (
     <div className="chat chat-end">
       <div className="chat-bubble">{content}</div>

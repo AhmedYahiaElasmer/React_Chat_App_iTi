@@ -7,20 +7,20 @@ export default {
     "node_modules/react-daisyui/dist/**/*.js",
   ],
   theme: {
-    
     extend: {
       colors: {
         mytheme: {
           white: "#FFFFFF",
 
           grad_Color: "bg-gradient-to-r from-blue-700 to-purple-800",
-        }, gray: { 50: "#fffafa" }
+        },
+        gray: { 50: "#fffafa" },
       },
       fontFamily: { montserrat: "Montserrat" },
       backgroundImage: {
         "grad-color": "linear-gradient(90deg, #041AD8 0%, #B012AA 78.84%)",
-        gradient: "linear-gradient(180deg, #302f2f,#000000)",
-        gradient1: "radial-gradient(180deg, #ffffff,#000000,#101010)",
+        // gradient: "linear-gradient(180deg, #302f2f,#000000)",
+        // gradient1: "radial-gradient(180deg, #ffffff,#000000,#101010)",
       },
     },
   },
