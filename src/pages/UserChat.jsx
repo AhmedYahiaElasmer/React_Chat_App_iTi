@@ -24,10 +24,10 @@ function UserChat() {
   // let { page } = useParams();
   // console.log(id);
   let fetchData;
-  let fetchaa = () => {
-    // setPage(page + 1);
-    console.log("fetchData fetchData");
-  };
+  // let fetchaa = () => {
+  //   // setPage(page + 1);
+  //   console.log("fetchData fetchData");
+  // };
   useEffect(() => {
     const abortCtrl = new AbortController();
     fetchData = async () => {
@@ -39,7 +39,7 @@ function UserChat() {
         };
 
         const response = await requestApi(
-          `/message?chat_=${id}&page_=${page}`,
+          `/message/getAllMessages/${id}`,
           {
             method: "GET",
             headers: header,
@@ -47,19 +47,19 @@ function UserChat() {
           }
         );
 
+
         if (!response) return;
 
-        const chatData = response;
+        const chatData = response.allMessages;
         setSelectedConversation([
           ...selectedConversation,
           {
             chat_: id,
             page_: 0,
-            messages: [chatData.messages],
+            messages: [chatData],
           },
         ]);
-        // setMessages(chatData.messages);
-        // console.log(response.messages);
+
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -69,17 +69,17 @@ function UserChat() {
     }
 
     return () => abortCtrl.abort();
-  }, [id, page]);
+  }, [id]);
   // console.log("selectedConversation", selectedConversation);
   return (
     <>
-      <InfiniteScroll
+      {/* <InfiniteScroll
         dataLength={10}
         next={fetchaa}
         hasMore={true}
         loader={<h4 className="text-red-600">Loading...</h4>}
-      >
-        {console.log(fetchData)}
+      > */}
+        {/* {console.log(fetchData)} */}
         <div className="flex flex-col ">
           {selectedConversation[
             selectedConversation.findIndex((chat) => chat.chat_ === id)
@@ -93,7 +93,7 @@ function UserChat() {
             </div>
           ))}
         </div>
-      </InfiniteScroll>
+      {/* </InfiniteScroll> */}
       {/* {console.log(user._id === message.sender._id)} */}
     </>
   );
