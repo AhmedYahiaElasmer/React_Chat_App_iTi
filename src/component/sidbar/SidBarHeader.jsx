@@ -1,13 +1,40 @@
 import WhiteLogo from "../logo/WhiteLogo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisV, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEllipsisV,
+  faSignOutAlt,
+  faUserGroup,
+} from "@fortawesome/free-solid-svg-icons";
 import useLogout from "../../hooks/useLogout";
 import Avatar from "../Avatar";
 import useAuth from "../../hooks/useAuth";
-const SidBarHeader = () => {
+import NewGroup from "../modal/NewGroup";
+import { useState } from "react";
+const SidBarHeader = (props) => {
+  const {openModal}=props
   const { loading, logout } = useLogout();
   const { getAuthUser } = useAuth();
   const { image } = JSON.parse(getAuthUser("user"));
+
+  // const [modalOpen, setModalOpen] = useState(false);
+
+  // const openModal = () => {
+  //   setModalOpen(true);
+  // };
+
+  // const closeModal = () => {
+  //   setModalOpen(false);
+  // };
+
+  // const confirmAction = () => {
+  //   console.log("Confirmed");
+  //   closeModal();
+  // };
+
+  // const cancelAction = () => {
+  //   console.log("Cancelled");
+  //   closeModal();
+  // };
 
   // console.log(image);
   return (
@@ -34,6 +61,16 @@ const SidBarHeader = () => {
                   <FontAwesomeIcon icon={faSignOutAlt} className="text-lg " />
                 </a>
               </li>
+              <li>
+                <button
+                  onClick={openModal}
+                  className="text-black flex justify-around "
+                >
+                  <p className="text-lg font-medium">New Group</p>
+                  <FontAwesomeIcon icon={faUserGroup} className="text-lg " />
+                </button>
+              </li>
+              
             </ul>
           </div>
           {/*  */}

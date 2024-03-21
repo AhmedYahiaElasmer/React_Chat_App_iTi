@@ -79,7 +79,7 @@ function UserChat() {
         hasMore={true}
         loader={<h4 className="text-red-600">Loading...</h4>}
       >
-        {console.log(fetchData)}
+        {/* {console.log(fetchData)} */}
         <div className="flex flex-col ">
           {selectedConversation[
             selectedConversation.findIndex((chat) => chat.chat_ === id)
