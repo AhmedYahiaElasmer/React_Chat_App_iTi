@@ -14,7 +14,7 @@ import { connectionSocket } from "../utils/socketMethods";
 const Auth = () => {
   const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 1100);
 
-  const { setAllUsers } = useAllUsers();
+  const { setAllUsers , allUsers } = useAllUsers();
   const { setAllChats, allChats } = useChats();
   const { requestApi } = useRequest();
   const { getAuthUser } = useAuth();
@@ -66,11 +66,11 @@ const Auth = () => {
     };
 
     window.addEventListener("resize", handleResize);
-    const socketConnection = connectionSocket();
-    socketConnection.emit("addUser", userId);
+    // const socketConnection = connectionSocket();
+    // socketConnection.emit("addUser", userId);
     return () => {
       window.removeEventListener("resize", handleResize);
-      socketConnection.disconnect();
+      // socketConnection.disconnect();
     };
   }, []);
 
