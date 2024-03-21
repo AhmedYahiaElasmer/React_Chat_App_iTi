@@ -25,7 +25,7 @@ const AllUsers = (props) => {
           <div className="flex flex-col scrollbar style={{ height: '200px' }} h-screen items-start overflow-auto gap-5">
             {isChat ? (
               <>
-                {allChats.map((chat) => (
+                {allChats?.map((chat) => (
                   <Link key={chat._id} to={`/home/userchat/${chat._id}`}>
                     <User user={chat} isChat={isChat} />
                   </Link>

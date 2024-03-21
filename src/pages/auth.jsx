@@ -30,7 +30,7 @@ const Auth = () => {
         const header = {
           Authorization: `Bearer ${token}`,
         };
-
+        // console.log(header);
         const responseUser = await requestApi("/user", {
           method: "GET",
           headers: header,
@@ -47,7 +47,7 @@ const Auth = () => {
           headers: header,
           signal: abortCtrl.signal,
         });
-        // console.log("responseChat", responseChat);
+        console.log("responseChat", responseChat);
         setAllChats(responseChat.chat);
         /////////////////////////////////////////////////////
       } catch (error) {
