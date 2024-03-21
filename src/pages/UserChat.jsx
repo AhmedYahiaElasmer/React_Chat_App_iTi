@@ -116,6 +116,7 @@ function UserChat() {
         next={fetchaa}
         hasMore={true}
         loader={<h4 className="text-red-600">Loading...</h4>}
+
       > */}
       {/* {console.log(fetchData)} */}
       <div className="flex flex-col ">
@@ -132,6 +133,7 @@ function UserChat() {
         ))}
       </div>
       {/* </InfiniteScroll> */}
+
       {/* {console.log(user._id === message.sender._id)} */}
     </>
   );
