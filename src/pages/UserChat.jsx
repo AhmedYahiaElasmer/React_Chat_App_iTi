@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import useRequest from "../hooks/useRequest";
 import useAuth from "../hooks/useAuth";
-import { useConversation } from "../zustand/zustand";
-import { useParams } from "react-router-dom";
+import { useChats, useConversation } from "../zustand/zustand";
+import { useParams, useSearchParams } from "react-router-dom";
 import Sender from "../component/messages/Sender";
 import Resever from "../component/messages/Resever";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -20,26 +20,58 @@ function UserChat() {
     selectedConversation,
     setSelectedConversation,
   } = useConversation();
-  let { id } = useParams();
+
+  const { setAllChats, allChats } = useChats();
+  // let { id ,user_ } = useParams();
+  
+  // console.log(id);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+
+  const id = searchParams.get("id");
+  const user_ = searchParams.get("user_");
+  
+  // console.log(user_);
   // let { page } = useParams();
   // console.log(id);
-  let fetchData;
-  let fetchaa = () => {
-    // setPage(page + 1);
-    console.log("fetchData fetchData");
-  };
+
+  // let fetchaa = () => {
+  //   // setPage(page + 1);
+  //   console.log("fetchData fetchData");
+  // };
+
   useEffect(() => {
     const abortCtrl = new AbortController();
-    fetchData = async () => {
-      try {
-        const token = getAuthUser("token");
+    const token = getAuthUser("token");
         // console.log(token);
         const header = {
           Authorization: `Bearer ${token}`,
         };
 
+    const fetchUser=async()=>{
+      const response = await requestApi(
+        `/chat/privateChat/${user_}`,
+        {
+            method: "POST",
+            headers: header,
+            signal: abortCtrl.signal,
+        }
+      )
+      console.log(response);
+      setSearchParams({id:response?.chat._id});
+      if(response?.chat){
+        if(!allChats.some((chat) => chat._id === response?.chat._id)){
+          setAllChats([...allChats,response.chat]);
+        }
+      }
+    }
+
+
+
+    const fetchData = async () => {
+      try {
         const response = await requestApi(
-          `/message?chat_=${id}&page_=${page}`,
+          `/message/getAllMessages/${id}`,
           {
             method: "GET",
             headers: header,
@@ -47,53 +79,61 @@ function UserChat() {
           }
         );
 
+        // console.log(response);
         if (!response) return;
-
-        const chatData = response;
+        const chatData = response.allMessages;
         setSelectedConversation([
           ...selectedConversation,
           {
             chat_: id,
             page_: 0,
-            messages: [chatData.messages],
+            messages: [chatData],
           },
         ]);
-        // setMessages(chatData.messages);
-        // console.log(response.messages);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
     };
-    if (!selectedConversation.some((chat) => chat.chat_ === id)) {
+
+
+    if (!selectedConversation.some((chat) => chat.chat_ === id) &&id) {
       fetchData();
     }
 
+    if(user_){
+      // console.log("user_:",user_);
+      fetchUser()
+
+    }
+
     return () => abortCtrl.abort();
-  }, [id, page]);
+  }, [id, user_]);
   // console.log("selectedConversation", selectedConversation);
   return (
     <>
-      <InfiniteScroll
+      {/* <InfiniteScroll
         dataLength={10}
         next={fetchaa}
         hasMore={true}
         loader={<h4 className="text-red-600">Loading...</h4>}
-      >
-        {/* {console.log(fetchData)} */}
-        <div className="flex flex-col ">
-          {selectedConversation[
-            selectedConversation.findIndex((chat) => chat.chat_ === id)
-          ]?.messages[0].map((message) => (
-            <div key={message?._id} className="">
-              {user._id === message?.sender?._id ? (
-                <Sender message={message} />
-              ) : (
-                <Resever message={message} />
-              )}
-            </div>
-          ))}
-        </div>
-      </InfiniteScroll>
+
+      > */}
+      {/* {console.log(fetchData)} */}
+      <div className="flex flex-col ">
+        {selectedConversation[
+          selectedConversation.findIndex((chat) => chat.chat_ === id)
+        ]?.messages[0].map((message) => (
+          <div key={message?._id} className="">
+            {user._id === message?.sender?._id ? (
+              <Sender message={message} />
+            ) : (
+              <Resever message={message} />
+            )}
+          </div>
+        ))}
+      </div>
+      {/* </InfiniteScroll> */}
+
       {/* {console.log(user._id === message.sender._id)} */}
     </>
   );

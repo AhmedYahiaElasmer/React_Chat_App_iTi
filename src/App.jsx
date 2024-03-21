@@ -7,7 +7,7 @@ import { useAuthContext } from "./context/AuthContext";
 import { Navigate } from "react-router-dom/dist";
 import Error from "./pages/Error";
 import Toaster from "react-hot-toast"
-
+import HeroPage from './pages/Hero'
 function App() {
   const { authUser } = useAuthContext();
   return (
@@ -24,6 +24,10 @@ function App() {
         <Route
           path="/home/*"
           element={authUser ? <Home /> : <Navigate to={"/"} />}
+        />
+         <Route
+          path="/home/hero"
+          element={authUser ? <HeroPage /> : <Navigate to={"/"} />}
         />
         <Route path="*" element={<Error />} />
       </Routes>

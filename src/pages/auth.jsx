@@ -15,9 +15,9 @@ import toast from "react-hot-toast";
 import axios from "axios";
 
 const Auth = () => {
-  const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 900);
+  const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 1100);
 
-  const { setAllUsers } = useAllUsers();
+  const { setAllUsers , allUsers } = useAllUsers();
   const { setAllChats, allChats } = useChats();
   const { requestApi } = useRequest();
   const { getAuthUser } = useAuth();
@@ -33,7 +33,7 @@ const Auth = () => {
         const header = {
           Authorization: `Bearer ${token}`,
         };
-
+        // console.log(header);
         const responseUser = await requestApi("/user", {
           method: "GET",
           headers: header,
@@ -44,13 +44,14 @@ const Auth = () => {
 
         const usersData = responseUser.users;
         setAllUsers(usersData);
+        console.log(allUsers);
         //////////////////////////////////////////////////////
         const responseChat = await requestApi(`/chat`, {
           method: "GET",
           headers: header,
           signal: abortCtrl.signal,
         });
-        // console.log("responseChat", responseChat);
+        console.log("responseChat", responseChat);
         setAllChats(responseChat.chat);
         /////////////////////////////////////////////////////
       } catch (error) {
@@ -64,15 +65,15 @@ const Auth = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsScreenSmall(window.innerWidth <= 900);
+      setIsScreenSmall(window.innerWidth <= 1100);
     };
 
     window.addEventListener("resize", handleResize);
-    const socketConnection = connectionSocket();
-    socketConnection.emit("addUser", userId);
+    // const socketConnection = connectionSocket();
+    // socketConnection.emit("addUser", userId);
     return () => {
       window.removeEventListener("resize", handleResize);
-      socketConnection.disconnect();
+      // socketConnection.disconnect();
     };
   }, []);
   //////////////////////////////////////////////////////////////////////////////////
@@ -136,7 +137,7 @@ const Auth = () => {
       />
         <Routes>
           <Route path="/*" element={<MsgsContainer />}>
-            <Route path="userchat/:id" element={<UserChat />} />
+            <Route path="userchat/" element={<UserChat />} />
             <Route path="chatroom" element={<ChatRoom />} />
           </Route>
         </Routes>

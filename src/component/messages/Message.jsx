@@ -2,7 +2,6 @@ import useAuth from "../../hooks/useAuth";
 import { useConversation } from "../../zustand/zustand";
 import Resever from "./Resever";
 import Sender from "./Sender";
-
 const Message = () => {
   const {
     messages,

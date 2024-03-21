@@ -4,7 +4,7 @@ import User from "../users/User";
 import { Link } from "react-router-dom";
 import useRequest from "../../hooks/useRequest";
 import { useChats, useAllUsers } from "../../zustand/zustand";
-
+import './AllUsers.css'
 const AllUsers = (props) => {
   const { isChat } = props;
   const { allUsers } = useAllUsers();
@@ -22,19 +22,19 @@ const AllUsers = (props) => {
       } */}
           {/* {console.log(allUsers)} */}
           <h4 className="font-medium pb-4">All Users</h4>
-          <div className="flex flex-col scrollbar style={{ height: '200px' }} h-screen items-start overflow-auto gap-5">
+          <div className="flex flex-col scrollbar scrol h-screen items-start overflow-auto gap-5">
             {isChat ? (
               <>
-                {allChats.map((chat) => (
-                  <Link key={chat._id} to={`/home/userchat/${chat._id}`}>
+                {allChats?.map((chat) => (
+                  <Link key={chat._id} to={`/home/userchat/?id=${chat._id}`}>
                     <User user={chat} isChat={isChat} />
                   </Link>
                 ))}
               </>
             ) : (
               <>
-                {allUsers.map((user) => (
-                  <Link key={user._id} to={`/home/userchat/${user._id}`}>
+                {allUsers?.map((user) => (
+                  <Link key={user._id} to={`/home/userchat/?user_=${user._id}`}>
                     <User user={user} isChat={isChat} />
                   </Link>
                 ))}
