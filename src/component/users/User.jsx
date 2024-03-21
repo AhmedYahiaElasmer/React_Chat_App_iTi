@@ -1,14 +1,36 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-constant-condition */
+import useAuth from "../../hooks/useAuth";
 import Avatar from "../Avatar";
 
 const User = (props) => {
   const { user, isChat = false, initImage = user.image } = props;
+  const { getAuthUser } = useAuth();
+  const { _id } = JSON.parse(getAuthUser("user"));
+  // console.log(_id);
   // console.log(user);
   return (
     <div className="chat chat-start">
-      <Avatar isMessage={true} initImage={initImage} />
+      {isChat ? (
+        user.members.length > 2 ? (
+          "group"
+        ) : (
+          user.members.map((member) =>
+            member._id == _id ? null : (
+              <>
+                <Avatar
+                  isMessage={true}
+                  initImage={isChat ? member.image : initImage}
+                />
+              </>
+            )
+          )
+        )
+      ) : (
+        <Avatar isMessage={true} initImage={initImage} />
+      )}
+
       <div className="chat-header">
         {isChat
           ? user?.name

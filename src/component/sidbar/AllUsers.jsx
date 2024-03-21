@@ -4,7 +4,7 @@ import User from "../users/User";
 import { Link } from "react-router-dom";
 import useRequest from "../../hooks/useRequest";
 import { useChats, useAllUsers } from "../../zustand/zustand";
-import './AllUsers.css'
+import "./AllUsers.css";
 const AllUsers = (props) => {
   const { isChat } = props;
   const { allUsers } = useAllUsers();
