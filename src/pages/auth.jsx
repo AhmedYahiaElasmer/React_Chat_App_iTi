@@ -83,7 +83,7 @@ const Auth = () => {
       <div className={isScreenSmall ? "col-span-9" : "col-span-7"}>
         <Routes>
           <Route path="/*" element={<MsgsContainer />}>
-            <Route path="userchat/:id/:user_?" element={<UserChat />} />
+            <Route path="userchat/" element={<UserChat />} />
             <Route path="chatroom" element={<ChatRoom />} />
           </Route>
         </Routes>

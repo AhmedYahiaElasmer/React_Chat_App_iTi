@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import useRequest from "../hooks/useRequest";
 import useAuth from "../hooks/useAuth";
 import { useChats, useConversation } from "../zustand/zustand";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import Sender from "../component/messages/Sender";
 import Resever from "../component/messages/Resever";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -22,7 +22,15 @@ function UserChat() {
   } = useConversation();
 
   const { setAllChats, allChats } = useChats();
-  let { id ,user_ } = useParams();
+  // let { id ,user_ } = useParams();
+  
+  // console.log(id);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+
+  const id = searchParams.get("id");
+  const user_ = searchParams.get("user_");
+  
   // console.log(user_);
   // let { page } = useParams();
   // console.log(id);
@@ -35,29 +43,34 @@ function UserChat() {
 
   useEffect(() => {
     const abortCtrl = new AbortController();
-    const fetchData = async () => {
-      try {
-        const token = getAuthUser("token");
+    const token = getAuthUser("token");
         // console.log(token);
         const header = {
           Authorization: `Bearer ${token}`,
         };
 
-        if(user_){
-          const response = await requestApi(
-            `/chat/privateChat/${user_}`,
-            {
-                method: "POST",
-                headers: header,
-                signal: abortCtrl.signal,
-            }
-          )
-          console.log(response);
-          id = response?.chat._id;
-          if(response?.chat){
-            setAllChats([...allChats,response.chat]);
-          }
+    const fetchUser=async()=>{
+      const response = await requestApi(
+        `/chat/privateChat/${user_}`,
+        {
+            method: "POST",
+            headers: header,
+            signal: abortCtrl.signal,
         }
+      )
+      console.log(response);
+      setSearchParams({id:response?.chat._id});
+      if(response?.chat){
+        if(!allChats.some((chat) => chat._id === response?.chat._id)){
+          setAllChats([...allChats,response.chat]);
+        }
+      }
+    }
+
+
+
+    const fetchData = async () => {
+      try {
         const response = await requestApi(
           `/message/getAllMessages/${id}`,
           {
@@ -83,8 +96,16 @@ function UserChat() {
         console.error("Error fetching users:", error);
       }
     };
-    if (!selectedConversation.some((chat) => chat.chat_ === id)) {
+
+
+    if (!selectedConversation.some((chat) => chat.chat_ === id) &&id) {
       fetchData();
+    }
+
+    if(user_){
+      // console.log("user_:",user_);
+      fetchUser()
+
     }
 
     return () => abortCtrl.abort();
