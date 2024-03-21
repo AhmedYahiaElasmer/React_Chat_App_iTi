@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import useRequest from "../hooks/useRequest";
 import useAuth from "../hooks/useAuth";
-import { useConversation } from "../zustand/zustand";
+import { useChats, useConversation } from "../zustand/zustand";
 import { useParams } from "react-router-dom";
 import Sender from "../component/messages/Sender";
 import Resever from "../component/messages/Resever";
@@ -20,17 +20,22 @@ function UserChat() {
     selectedConversation,
     setSelectedConversation,
   } = useConversation();
-  let { id } = useParams();
+
+  const { setAllChats, allChats } = useChats();
+  let { id ,user_ } = useParams();
+  // console.log(user_);
   // let { page } = useParams();
   // console.log(id);
-  let fetchData;
+
   // let fetchaa = () => {
   //   // setPage(page + 1);
   //   console.log("fetchData fetchData");
   // };
+
+
   useEffect(() => {
     const abortCtrl = new AbortController();
-    fetchData = async () => {
+    const fetchData = async () => {
       try {
         const token = getAuthUser("token");
         // console.log(token);
@@ -38,6 +43,21 @@ function UserChat() {
           Authorization: `Bearer ${token}`,
         };
 
+        if(user_){
+          const response = await requestApi(
+            `/chat/privateChat/${user_}`,
+            {
+                method: "POST",
+                headers: header,
+                signal: abortCtrl.signal,
+            }
+          )
+          console.log(response);
+          id = response?.chat._id;
+          if(response?.chat){
+            setAllChats([...allChats,response.chat]);
+          }
+        }
         const response = await requestApi(
           `/message/getAllMessages/${id}`,
           {
@@ -47,9 +67,8 @@ function UserChat() {
           }
         );
 
-
+        // console.log(response);
         if (!response) return;
-
         const chatData = response.allMessages;
         setSelectedConversation([
           ...selectedConversation,
@@ -69,7 +88,7 @@ function UserChat() {
     }
 
     return () => abortCtrl.abort();
-  }, [id]);
+  }, [id,user_]);
   // console.log("selectedConversation", selectedConversation);
   return (
     <>

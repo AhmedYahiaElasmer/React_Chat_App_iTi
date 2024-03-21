@@ -12,9 +12,6 @@ const ChatBar = () => {
             placeholder="Send a message"
           />
           <button
-            onClick={() => {
-              removeAuthUser();
-            }}
             type="button"
             className="absolute inset-y-0 end-0 flex items-center pe-3"
           >

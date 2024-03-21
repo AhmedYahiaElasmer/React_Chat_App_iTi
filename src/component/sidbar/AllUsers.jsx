@@ -34,7 +34,7 @@ const AllUsers = (props) => {
             ) : (
               <>
                 {allUsers.map((user) => (
-                  <Link key={user._id} to={`/home/userchat/${user._id}`}>
+                  <Link key={user._id} to={`/home/userchat/65fb85d75e58ba14c7db13ww/${user._id}`}>
                     <User user={user} isChat={isChat} />
                   </Link>
                 ))}
