@@ -10,7 +10,7 @@ function LoginComponent() {
         </div>
         <div className="flex flex-col justify-center items-center gap-1 ">
           <h1 className="text-5xl tracking-[.15em] font-semibold">
-            TYPING....
+          TYPING.... 
           </h1>
           <p className="font-thin text-base tracking-wider">
             Connect to the world in few touches
