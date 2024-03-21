@@ -4,3 +4,16 @@
 .menu-icon {
     background-color: transparent !important;
   }
+  .position{
+    position: absolute;
+    bottom: 0% !important;
+  }
+  .drawer-toggle:checked ~ .drawer-side {
+    
+    position: fixed;
+    z-index: 6;
+  }
+  .messages-scroll{
+    overflow: scroll;
+    height: 82vh;
+  }

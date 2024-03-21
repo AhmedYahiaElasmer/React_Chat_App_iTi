@@ -40,7 +40,6 @@ function UserChat() {
   //   console.log("fetchData fetchData");
   // };
 
-
   useEffect(() => {
     const abortCtrl = new AbortController();
     const token = getAuthUser("token");
@@ -91,7 +90,6 @@ function UserChat() {
             messages: [chatData],
           },
         ]);
-
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -109,7 +107,7 @@ function UserChat() {
     }
 
     return () => abortCtrl.abort();
-  }, [id,user_]);
+  }, [id, user_]);
   // console.log("selectedConversation", selectedConversation);
   return (
     <>
@@ -119,20 +117,20 @@ function UserChat() {
         hasMore={true}
         loader={<h4 className="text-red-600">Loading...</h4>}
       > */}
-        {/* {console.log(fetchData)} */}
-        <div className="flex flex-col ">
-          {selectedConversation[
-            selectedConversation.findIndex((chat) => chat.chat_ === id)
-          ]?.messages[0].map((message) => (
-            <div key={message?._id} className="">
-              {user._id === message?.sender?._id ? (
-                <Sender message={message} />
-              ) : (
-                <Resever message={message} />
-              )}
-            </div>
-          ))}
-        </div>
+      {/* {console.log(fetchData)} */}
+      <div className="flex flex-col ">
+        {selectedConversation[
+          selectedConversation.findIndex((chat) => chat.chat_ === id)
+        ]?.messages[0].map((message) => (
+          <div key={message?._id} className="">
+            {user._id === message?.sender?._id ? (
+              <Sender message={message} />
+            ) : (
+              <Resever message={message} />
+            )}
+          </div>
+        ))}
+      </div>
       {/* </InfiniteScroll> */}
       {/* {console.log(user._id === message.sender._id)} */}
     </>

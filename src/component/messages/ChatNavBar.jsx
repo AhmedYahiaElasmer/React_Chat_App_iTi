@@ -11,12 +11,12 @@ import Avatar from "../Avatar";
 import { useConversation } from "../../zustand/zustand";
 import { useParams } from "react-router-dom";
 const ChatNavBar = () => {
-  const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 900);
+  const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 1100);
   const { selectedConversation } = useConversation();
   let { id } = useParams();
   useEffect(() => {
     const handleResize = () => {
-      setIsScreenSmall(window.innerWidth <= 900);
+      setIsScreenSmall(window.innerWidth <= 1100);
     };
 
     window.addEventListener("resize", handleResize);
