@@ -12,7 +12,7 @@ import "./auth.css";
 import { connectionSocket } from "../utils/socketMethods";
 
 const Auth = () => {
-  const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 900);
+  const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 1100);
 
   const { setAllUsers } = useAllUsers();
   const { setAllChats, allChats } = useChats();
@@ -61,7 +61,7 @@ const Auth = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsScreenSmall(window.innerWidth <= 900);
+      setIsScreenSmall(window.innerWidth <= 1100);
     };
 
     window.addEventListener("resize", handleResize);

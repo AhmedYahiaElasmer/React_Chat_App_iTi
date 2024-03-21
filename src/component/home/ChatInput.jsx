@@ -30,13 +30,6 @@ const ChatInput = () => {
                     <FaTelegram />
                 </div>
             </div>
-            <div className="message-list">
-                {messages.map((msg, index) => (
-                    <div key={index} className="message">
-                        {msg}
-                    </div>
-                ))}
-            </div>
         </div>
     );
 };

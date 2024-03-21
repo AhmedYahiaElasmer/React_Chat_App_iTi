@@ -17,7 +17,6 @@ const Slide = ({ imageUrl, paragraphs }) => {
   }
 
   return (
-    <div className="contain">
     <div className="slider-container">
       <div className="slider-image" style={{ transform: `rotate(${rotation}deg)` }}>
         <img src={imageUrl} alt="Slider" />
@@ -31,7 +30,6 @@ const Slide = ({ imageUrl, paragraphs }) => {
         </button>
       </div>
       <p className="slider-paragraph">{paragraphs[index]}</p>
-    </div>
     </div>
   )
 }

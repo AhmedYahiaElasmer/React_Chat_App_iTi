@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Text, Heading, Img , Slider,Slide,Slid } from "../component/heros";
+import { Button, Text, Heading, Img , Slider,Slide } from "../component/heros";
 import '../styles/hero.css'
 import '../styles/font.css'
 import '../styles/tailwind.css'
@@ -9,10 +9,8 @@ const paragraphs = [
   'Keep you update',
   'Friendly Environment',
 ];
-const imageUrl = './images/1.png'
-const images = ['/images/Group 46.png',
-                '/images/Group 46.png',
-                '/images/Group 46.png']
+const imageUrl = '../../images/1.png'
+
 export default function HeroPage() {
   return (
     <>
@@ -20,7 +18,7 @@ export default function HeroPage() {
         <div className="flex flex-col self-end items-center">
           <div className="flex md:flex-col justify-between items-start w-[50%] md:w-full gap-5">
             <Img
-              src="images/img_untitled_1_1.png"
+              src="../../images/img_untitled_1_1.png"
               alt="untitled1one"
               className="w-[31%] md:w-[20%] md:h-auto md:m-auto sm:w-[40%] sm:h-auto sm:m-auto object-cover"
             />
