@@ -1,4 +1,4 @@
-.carousel {
+/* .carousel {
     position: relative;
     overflow: hidden;
     display: flex;
@@ -42,7 +42,7 @@
   .btn{
     color: white;
     font-size: 100px;
-    /* background: linear-gradient(#000 70%,#fff 30%); */
+    background: linear-gradient(#000 70%,#fff 30%); 
   }
   
   button:focus {
@@ -64,4 +64,4 @@
   @keyframes fadeOut{
     0% { opacity: 1; }
     100% { opacity: 0; }
-  }
+  } */
