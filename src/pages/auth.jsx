@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Sidebar from "../component/home/Sidebar";
 import MsgsContainer from "../component/home/MsgsContainer";
 import UserChat from "./UserChat";
@@ -9,7 +9,8 @@ import useRequest from "../hooks/useRequest";
 import useAuth from "../hooks/useAuth";
 import Drawer from "../component/home/Drawer";
 import "./auth.css";
-import { connectionSocket } from "../utils/socketMethods";
+import { SocketContext } from "../context/SocketContext";
+
 
 const Auth = () => {
   const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 1100);
@@ -18,6 +19,7 @@ const Auth = () => {
   const { setAllChats, allChats } = useChats();
   const { requestApi } = useRequest();
   const { getAuthUser } = useAuth();
+  const socket = useContext(SocketContext);
 
   const userId = JSON.parse(getAuthUser("user"))._id;
   // console.log(JSON.parse(getAuthUser("user"))._id);
@@ -57,7 +59,15 @@ const Auth = () => {
     };
 
     fetchData();
-    return () => abortCtrl.abort();
+
+    socket.emit("addUser", userId);
+    // socket.once("addUser", userId)
+    return () => {
+      // socket.disconnect();
+      // socket.remove;
+      socket.off("addUser",userId);
+      abortCtrl.abort();
+    }
   }, []);
 
   useEffect(() => {
@@ -68,6 +78,10 @@ const Auth = () => {
     window.addEventListener("resize", handleResize);
     // const socketConnection = connectionSocket();
     // socketConnection.emit("addUser", userId);
+
+
+    ///// Socket Connection
+
     return () => {
       window.removeEventListener("resize", handleResize);
       // socketConnection.disconnect();
@@ -82,12 +96,15 @@ const Auth = () => {
         </div>
       )}
       <div className={isScreenSmall ? "col-span-9" : "col-span-7"}>
+        
         <Routes>
+
           <Route path="/*" element={<MsgsContainer />}>
             <Route path="userchat/" element={<UserChat />} />
             <Route path="chatroom" element={<ChatRoom />} />
           </Route>
         </Routes>
+
       </div>
     </div>
   );
