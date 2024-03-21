@@ -1,11 +1,19 @@
 /* eslint-disable react/prop-types */
 import Avatar from "../Avatar";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
 const Sender = (props) => {
-  const { content } = props.message;
+  const { content, updatedAt } = props.message;
+  TimeAgo.addLocale(en);
+  const timeAgo = new TimeAgo("en-US");
+
+  // console.log("timeAgo", timeAgo.format(new Date(updatedAt)));
   return (
     <div className="chat chat-end">
       <div className="chat-bubble">{content}</div>
-      <time className="chat-footer text-xs opacity-50">12:46</time>
+      <time className="chat-footer text-xs opacity-50">
+        {timeAgo.format(new Date(updatedAt))}
+      </time>
 
       {/* <div className="chat-footer opacity-50">Seen at 12:46</div> */}
     </div>
