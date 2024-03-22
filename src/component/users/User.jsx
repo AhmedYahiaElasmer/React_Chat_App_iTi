@@ -10,7 +10,7 @@ const User = (props) => {
   const { _id } = JSON.parse(getAuthUser("user"));
 
   return (
-    <div className="chat chat-start">
+    <div className="chat chat-start flex justify-center items-center">
       {isChat ? (
         user.members.length > 2 ? (
           "group"

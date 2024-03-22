@@ -2,7 +2,7 @@
 import React from "react";
 import Required from "./required";
 
-function RegisterInput({ label, name, register, errors, validationRules }) {
+function RegisterInput({ label, name, register, errors, validationRules , type }) {
   return (
     <div className="flex flex-col">
       <label htmlFor={name} className="w-full">
@@ -11,7 +11,7 @@ function RegisterInput({ label, name, register, errors, validationRules }) {
       <input
         {...register(name, validationRules)}
         id={name}
-        type="text"
+        type={type}
         className={
           errors[name]
             ? "outline-red-600 input input-bordered bg-transparent h-10 w-full"

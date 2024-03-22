@@ -13,7 +13,7 @@ export async function login(data){
 export async function signUp(data){
     try {
         const req = (await instance.post("/auth/signup",data)).data;
-        console.log("Successfully SignUp");
+        // console.log("Successfully SignUp");
         return req;
     } catch (error) {
         console.log(error);

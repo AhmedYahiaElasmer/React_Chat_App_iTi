@@ -146,7 +146,7 @@ function UserChat() {
     setTimeout(() => {
       lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 100);
-  },[messageSocket , selectedConversation])
+  },[messageSocket , selectedConversation ,id])
   // console.log("selectedConversation", selectedConversation);
   return (
     <>

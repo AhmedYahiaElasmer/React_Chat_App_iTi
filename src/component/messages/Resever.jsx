@@ -22,7 +22,7 @@ const Resever = (props) => {
         {"  "}
         {sender?.lastname}
       </div>
-      <div className="chat-bubble">{content}</div>
+      <div className="chat-bubble overflow-x-auto">{content}</div>
       <time className="chat-footer text-xs opacity-50">
         {timeAgo.format(new Date(updatedAt))}
       </time>

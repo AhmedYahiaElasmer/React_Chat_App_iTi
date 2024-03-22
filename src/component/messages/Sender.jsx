@@ -10,10 +10,12 @@ const Sender = (props) => {
 
   // console.log("timeAgo", timeAgo.format(new Date(updatedAt)));
   return (
-    <div className="chat chat-end">
-      <div className="chat-bubble">{content}</div>
+    <div className="chat chat-end  ">
+      <div className="chat-bubble overflow-x-clip ">
+        {content}
+        </div>
       <time className="chat-footer text-xs opacity-50">
-        {/* {timeAgo.format(new Date(updatedAt))} */}
+        {timeAgo.format(new Date(updatedAt))}
       </time>
 
       <div className="chat-footer opacity-50">

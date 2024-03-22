@@ -8,12 +8,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Drawer from "../home/Drawer";
 import "./message.css";
 import Avatar from "../Avatar";
-import { useConversation } from "../../zustand/zustand";
-import { useParams } from "react-router-dom";
+import { useChats, useConversation } from "../../zustand/zustand";
+import { useSearchParams } from "react-router-dom";
+
+
 const ChatNavBar = ({openModal, openProfileModal}) => {
   const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 1100);
+  const [searchParams, setSearchParams] = useSearchParams();
   const { selectedConversation } = useConversation();
-  let { id } = useParams();
+  const { setAllChats, allChats } = useChats();
+
+  const id = searchParams.get("id");
+
+
   useEffect(() => {
     const handleResize = () => {
       setIsScreenSmall(window.innerWidth <= 1100);
@@ -26,18 +33,27 @@ const ChatNavBar = ({openModal, openProfileModal}) => {
     };
   }, []);
 
+
+  const selectedChat = allChats[
+    allChats.findIndex((chat) => chat._id ===id )
+  ];
+
+  // console.log(selectedChat , id);
+
   return (
     <>
       {/* {selectedConversation[
         selectedConversation.findIndex((chat) => chat.chat_ === id)
-      ]?.messages[0].map((message) => ( */}
+      ]?.messages[0].map((message) => (
+        "dsa"
+      ))} */}
       <div
         // key={message.id}
         className="flex justify-between bgnav py-3 px-6 items-center nav"
       >
-        <div className="flex justify-center items-center gap-5">
+        <div className="flex justify-center items-center gap-5 py-1">
           <Avatar isMessage={true} initImage={""} />
-          <div>username</div>
+          <div>{selectedChat?.name}</div>
         </div>
         <div className="flex justify-center items-center gap-5">
           <div>

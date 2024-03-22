@@ -87,7 +87,7 @@ const Auth = () => {
             }
           });
 
-          allChats.map((chat) => {
+          allChats?.map((chat) => {
             chat.members.map((member) => {
               // console.log(e_.userId);
               if (member._id === e_.userId) {
@@ -187,7 +187,7 @@ const Auth = () => {
   const user = JSON.parse(
     sessionStorage.getItem("user") || localStorage.getItem("user")
   );
-  console.log(user);
+  // console.log(user);
   ////////////////////////////////////////////////////////////////////////////////////
 
   ////////////////////////////////////////////////////////////////////////////////

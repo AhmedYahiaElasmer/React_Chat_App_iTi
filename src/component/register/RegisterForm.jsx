@@ -12,8 +12,12 @@ import WhiteLogo from "../logo/WhiteLogo";
 import RegisterInput from "./RegisterInput";
 
 
+import { useNavigate } from "react-router-dom";
+
+
 function RegisterForm() {
   const [fileUpload, onFileUpload] = useState("");
+  const navigate = useNavigate();
 
   const uploadAvatarHandler = async () => {
     try {
@@ -40,24 +44,24 @@ function RegisterForm() {
 
   const onSubmit =  async (data) => {
     let urlFile=""; //image Url back from Firebase
-    console.log(data);
-    const {fristName , password ,email , lastName} = data
+    // console.log(data);
+    const {firstName , password ,email , lastName} = data
 
 
     if (fileUpload) urlFile = await UplaodFile("avatar", fileUpload);
 
 
     const signUp_ = await signUp({
-      firstname: fristName,
+      firstname: firstName,
       lastname: lastName,
-      gender: "male",
       email,
       password,
       image:urlFile
     })
 
+    console.log(signUp_);
+    if(signUp_.status ==="Registration successfully") navigate("/")
     
-    console.log({signUp_ ,urlFile });
   };
 
   return (
@@ -105,8 +109,8 @@ function RegisterForm() {
                     message: "First Name must be at most 12 characters",
                   },
                   minLength: {
-                    value: 4,
-                    message: "First Name must be at least 4 characters",
+                    value: 3,
+                    message: "First Name must be at least 3 characters",
                   },
                 }}
               />
@@ -121,8 +125,8 @@ function RegisterForm() {
                     message: "Last Name must be at most 12 characters",
                   },
                   minLength: {
-                    value: 4,
-                    message: "Last Name must be at least 4 characters",
+                    value: 3,
+                    message: "Last Name must be at least 3 characters",
                   },
                 }}
               />
@@ -148,6 +152,7 @@ function RegisterForm() {
             <RegisterInput
               label="Password"
               name="password"
+              type={"password"}
               register={register}
               errors={errors}
               validationRules={{
@@ -171,6 +176,7 @@ function RegisterForm() {
             />
             <RegisterInput 
             className=""
+            type={"password"}
               label="Confirm Password"
               name="confirmPassword"
               register={register}

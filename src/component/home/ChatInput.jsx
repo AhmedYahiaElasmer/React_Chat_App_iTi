@@ -1,31 +1,33 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FaSmile, FaPaperclip, FaTelegram } from "react-icons/fa";
 import "./ChatInput.css";
-import { useSearchParams } from "react-router-dom";
+
 import useAuth from "../../hooks/useAuth";
 import useRequest from "../../hooks/useRequest";
 import { SocketContext } from "../../context/SocketContext";
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
+import { useSearchParams } from "react-router-dom";
+
 
 const ChatInput = () => {
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
+  const [showPicker, setShowPicker] = useState(false);
+  const [selectedEmoji, setSelectedEmoji] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+
   const { getAuthUser } = useAuth();
   const token = getAuthUser("token");
   const { requestApi } = useRequest();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const id = searchParams.get("id");
+
   const socket = useContext(SocketContext);
 
 
-  const id = searchParams.get("id");
   const user = JSON.parse(getAuthUser("user"));
 
-//   const handleSendMessage = async (e) => {
 
-//     if (message.trim() !== "") {
-//       setMessages([...messages, message]);
-//       setMessage("");
-//     }
-//   };
 
   const sendMessage = async (e) => {
     if (!e.trim().length) return;
@@ -51,13 +53,32 @@ const ChatInput = () => {
   }
 
 
+
+
+
+
+
+ 
+
+
   return (
+    <>
+        <div className=" absolute bottom-[89px] left-[8%]">
+    {showPicker &&
+        <Picker data={data} onEmojiSelect={(e)=>{setMessage((prev)=> prev+e.native)}}  />
+      }
+    </div>
     <div className="chat-container">
       <div className="chat-input">
-        <div className="icons">
-          <FaSmile />
-          <FaPaperclip />
+        <div className="icons flex justify-center"  >
+        
+          <FaSmile className=" text-3xl cursor-pointer" onClick={()=> setShowPicker(!showPicker)}   />
+          
+          {/* <FaPaperclip /> */}
         </div>
+      
+        
+  
         <input
           type="text"
           className="text-input"
@@ -65,11 +86,16 @@ const ChatInput = () => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <div className="send-icon" onClick={() => sendMessage(message)}>
-          <FaTelegram />
+        <div className="icons flex justify-center"  onClick={() => sendMessage(message)}>
+          <FaTelegram className=" text-3xl cursor-pointer" />
         </div>
       </div>
     </div>
+
+
+          </>
+
+    
   );
 };
 
