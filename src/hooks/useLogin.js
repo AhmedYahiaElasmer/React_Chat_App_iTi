@@ -3,11 +3,12 @@ import axios from "axios";
 // import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../context/AuthContext";
+import useAuth from "./useAuth";
 
 const useLogin = () => {
   const [loading, setLoading] = useState(false);
   const { setAuthUser } = useAuthContext();
-
+  const { setAuthUser_ } = useAuth();
   const login = async (email, password, rememberMe) => {
     setLoading(true);
     try {
@@ -15,7 +16,9 @@ const useLogin = () => {
         "https://chat-app-backend-x0hh.onrender.com/api/v1/auth/login",
         { email, password }
       );
+      console.log(response);
       const data = JSON.stringify(response.data);
+      setAuthUser_(JSON.stringify(response.data.data),rememberMe, "user");
       if (data.error) {
         throw new Error(data.error);
       } else {
@@ -25,8 +28,9 @@ const useLogin = () => {
           // console.log(data);
           // console.log(JSON.parse(data).token);
           const resData = JSON.parse(data);
-          sessionStorage.setItem("token", `"${resData.token}"`);
+          sessionStorage.setItem("token", `${response.data.token}`);
         }
+
         setAuthUser(data);
       }
     } catch (error) {

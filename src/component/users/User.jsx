@@ -1,28 +1,51 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-constant-condition */
+import useAuth from "../../hooks/useAuth";
 import Avatar from "../Avatar";
 
 const User = (props) => {
-  const {
-    user,
-    userName,
-    lastMassge = "true",
-    initImage = "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg",
-  } = props;
+  const { user, isChat = false, initImage = user.image, mode } = props;
+  const { getAuthUser } = useAuth();
+  const { _id } = JSON.parse(getAuthUser("user"));
+  // console.log(_id);
   // console.log(user);
+  // console.log(mode);
   return (
     <div className="chat chat-start">
-      <Avatar isMessage={true} initImage={initImage} />
+      {isChat ? (
+        user.members.length > 2 ? (
+          "group"
+        ) : (
+          user.members.map((member) =>
+            member._id == _id ? null : (
+              <>
+                {/* {console.log(member)} */}
+                <Avatar
+                  isMessage={true}
+                  initImage={isChat ? member.image : initImage}
+                  mode={member.isOnline ? "online" : "offline"}
+                />
+              </>
+            )
+          )
+        )
+      ) : (
+        <Avatar
+          isMessage={true}
+          initImage={initImage}
+          mode={mode ? "online" : "offline"}
+        />
+      )}
+
       <div className="chat-header">
-        {user.firstname}
-        {user.lastname}
-        {lastMassge ? (
+        {isChat
+          ? user?.name
+          : `${user?.firstname} ${user.lastname ? user.lastname : ""}`}
+
+        {isChat ? (
           <div className=" opacity-80 w-40 h-5 chat-footer  overflow-hidden truncate ">
-            last Massage Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Autem at eum impedit quam, modi neque. Porro quae quos sit
-            vero error at dolorum eligendi? Laboriosam illo harum eius officiis
-            mollitia.
+            {user.latestMessage?.content}
           </div>
         ) : (
           ""

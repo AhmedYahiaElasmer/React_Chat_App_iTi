@@ -11,6 +11,7 @@ import { signUp } from "../../api/auth";
 import WhiteLogo from "../logo/WhiteLogo";
 import RegisterInput from "./RegisterInput";
 
+
 function RegisterForm() {
   const [fileUpload, onFileUpload] = useState("");
 
@@ -25,23 +26,26 @@ function RegisterForm() {
     }
   };
 
+
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors, dirtyFields },
+    formState: { errors, dirtyFields },  
   } = useForm({
-    mode: "onChange",
+    mode:"onChange"
   });
   const password = useRef({});
   password.current = watch("password", "");
 
-  const onSubmit = async (data) => {
-    let urlFile = ""; //image Url back from Firebase
+  const onSubmit =  async (data) => {
+    let urlFile=""; //image Url back from Firebase
     console.log(data);
-    const { fristName, password, email, lastName } = data;
+    const {fristName , password ,email , lastName} = data
+
 
     if (fileUpload) urlFile = await UplaodFile("avatar", fileUpload);
+
 
     const signUp_ = await signUp({
       firstname: fristName,
@@ -49,10 +53,11 @@ function RegisterForm() {
       gender: "male",
       email,
       password,
-      image: urlFile,
-    });
+      image:urlFile
+    })
 
-    console.log({ signUp_, urlFile });
+    
+    console.log({signUp_ ,urlFile });
   };
 
   return (
@@ -77,14 +82,17 @@ function RegisterForm() {
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
+
           className="  flex flex-col text-white gap-6 lg:gap-8 justify-center items-center px-12 lg:px-16 "
+
         >
           <div className="flex flex-col  justify-center gap-3 items-center ">
             <h1 className="text-2xl font-extrabold">Create new account</h1>
-            <Avatar onFileUpload={onFileUpload} />
+            <Avatar onFileUpload={onFileUpload}  />
           </div>
           <div className="flex flex-col  ">
             <div className="flex gap-6  ">
+
               <RegisterInput
                 label="First Name"
                 name="firstName"
@@ -127,10 +135,13 @@ function RegisterForm() {
               errors={errors}
               validationRules={{
                 required: "Email is required",
+
+            
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                   message: "Invalid email address",
                 },
+
               }}
             />
 
@@ -140,6 +151,7 @@ function RegisterForm() {
               register={register}
               errors={errors}
               validationRules={{
+
                 required: "Password is required",
                 minLength: {
                   value: 8,
@@ -149,6 +161,7 @@ function RegisterForm() {
                   value: 16,
                   message: "Password must not exceed 16 characters",
                 },
+
                 pattern: {
                   value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}$/,
                   message: `Password must contain at least  one lowercase letter,\n
@@ -167,6 +180,7 @@ function RegisterForm() {
                 validate: (value) =>
                   value === password.current || "The passwords do not match",
               }}
+
             />
           </div>
           <div>

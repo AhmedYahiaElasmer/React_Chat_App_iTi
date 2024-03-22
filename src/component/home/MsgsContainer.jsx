@@ -1,22 +1,29 @@
 import { useEffect } from "react";
 import ChatBar from "../messages/ChatBar";
 import ChatNavBar from "../messages/ChatNavBar";
+import ChatInput from "./ChatInput";
 import { Outlet } from "react-router-dom";
+
 import { useAuthContext } from "../../context/AuthContext";
 import GrayLogo from "../logo/GrayLogo";
+
+import './Nav.css'
+
 const MsgsContainer = () => {
  
   return (
-    <div className="bg-msg-container  h-screen text-white ">
+    <div className="background h-screen text-white relative">
       {/* navbar */}
-      <ChatNavBar />
+      <ChatNavBar className='nav'/>
       {/* msg-container */}
-      <div className="px-4  flex-1 flex flex-col overflow  w-full ">
-        <Outlet />
-        <div className="absolute bottom-0 -left-[-23.5%]   w-3/4 ">
-          <ChatBar />
-        </div>
+      <div className="px-4  flex-1 flex flex-col overflow  w-full messages-scroll">
+        <Outlet/>
+        
+          {/* <ChatBar /> */}
+         
+        
       </div>
+      <ChatInput className='position'/>
     </div>
   );
   // return (
