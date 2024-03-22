@@ -196,10 +196,12 @@ const [ProfilemodalOpen, setProfileModalOpen] = useState(false);
 ////////////////////////////////////////////////////////////////////////////////////
 
   ////////////////////////////////////////////////////////////////////////////////
+
 return(
 <div className="grid grid-cols-9">
       {isScreenSmall ? null : (
         <div className="col-span-2">
+
           <Sidebar openModal={openModal} openProfileModal={openProfileModal}/>
         </div>
       )}
