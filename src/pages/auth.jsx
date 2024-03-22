@@ -13,6 +13,7 @@ import { SocketContext } from "../context/SocketContext";
 import NewGroup from "../component/modal/NewGroup";
 import toast from "react-hot-toast";
 import axios from "axios";
+import UserProfileModal from "../component/modal/UserProfile";
 
 const Auth = () => {
   const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 1100);
@@ -34,7 +35,7 @@ const Auth = () => {
       try {
         const token = getAuthUser("token");
         const header = {
-          Authorization: `Bearer ${token}`,
+          Authorization: ` Bearer ${token}`,
         };
         // console.log(header);
         const responseUser = await requestApi("/user", {
@@ -50,7 +51,7 @@ const Auth = () => {
         setAllUsers(usersData);
         // console.log(allUsers);
         //////////////////////////////////////////////////////
-        const responseChat = await requestApi(`/chat`, {
+        const responseChat = await requestApi("/chat", {
           method: "GET",
           headers: header,
           signal: abortCtrl.signal,
@@ -81,11 +82,12 @@ const Auth = () => {
       socket.emit("addUser", userId);
       socket.on("getUsersOnLine", (e) => {
         // console.log(allUsers,"GGGG");
+        console.log(e);
         let newUser;
         e.map((e_) => {
           allUsers.map((user) => {
             // console.log({user,e_});
-            if (user._id === e_.userId) {
+            if (user.id === e.userId) {
               user.isOnline = true;
               // console.log("true");
               return user;
@@ -95,7 +97,7 @@ const Auth = () => {
           allChats.map((chat) => {
             chat.members.map((member) => {
               // console.log(e_.userId);
-              if (member._id === e_.userId) {
+              if (member.id === e.userId) {
                 // console.log("true");
                 member.isOnline = true;
               }
@@ -178,6 +180,23 @@ const Auth = () => {
   const cancelAction = () => {
     closeModal();
   };
+
+  ////////////////////////////////////////////////////////////////////////////////
+  const [ProfilemodalOpen, setProfileModalOpen] = useState(false);
+  const openProfileModal = () => {
+    setProfileModalOpen(true);
+  };
+
+  const closeProfileModal = () => {
+    setProfileModalOpen(false);
+  };
+
+  const user = JSON.parse(
+    sessionStorage.getItem("user") || localStorage.getItem("user")
+  );
+  console.log(user);
+  ////////////////////////////////////////////////////////////////////////////////////
+
   ////////////////////////////////////////////////////////////////////////////////
   return (
     <div className="grid grid-cols-9">
@@ -193,8 +212,24 @@ const Auth = () => {
           onConfirm={confirmAction}
           onCancel={cancelAction}
         />
+        {/* ////////////////////////////////////// */}
+
+        <UserProfileModal
+          show={ProfilemodalOpen}
+          onClose={closeProfileModal}
+          user={user}
+        />
+
         <Routes>
-          <Route path="/*" element={<MsgsContainer />}>
+          <Route
+            path="/*"
+            element={
+              <MsgsContainer
+                openModal={openModal}
+                openProfileModal={openProfileModal}
+              />
+            }
+          >
             <Route path="userchat/" element={<UserChat />} />
             <Route path="chatroom" element={<ChatRoom />} />
           </Route>
