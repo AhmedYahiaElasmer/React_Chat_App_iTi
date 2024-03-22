@@ -62,12 +62,6 @@ const SidBarHeader = (props) => {
             >
 
               <li>
-                <a onClick={logout} className="text-black flex justify-around ">
-                  <p className=" font-medium">Logout</p>{" "}
-                  <FontAwesomeIcon icon={faSignOutAlt} className=" " />
-                </a>
-              </li>
-              <li>
                 <button
                   onClick={openModal}
                   className="text-black flex justify-around "
@@ -87,6 +81,12 @@ const SidBarHeader = (props) => {
                   <FontAwesomeIcon icon={faUser} className=" " />
                 </button>
               </li>  
+              <li>
+                <a onClick={logout} className="text-black flex justify-around ">
+                  <p className=" font-medium">Logout</p>{" "}
+                  <FontAwesomeIcon icon={faSignOutAlt} className=" " />
+                </a>
+              </li>
 
             </ul>
           </div>

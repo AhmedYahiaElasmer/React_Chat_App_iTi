@@ -13,7 +13,7 @@ const Sender = (props) => {
     <div className="chat chat-end">
       <div className="chat-bubble">{content}</div>
       <time className="chat-footer text-xs opacity-50">
-        {/* {timeAgo.format(new Date(updatedAt))} */}
+        {timeAgo.format(new Date(updatedAt))}
       </time>
 
       <div className="chat-footer opacity-50">
