@@ -17,7 +17,7 @@ import axios from "axios";
 const Auth = () => {
   const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 1100);
 
-  const { setAllUsers , allUsers } = useAllUsers();
+  const { setAllUsers, allUsers } = useAllUsers();
   const { setAllChats, allChats } = useChats();
   const { requestApi } = useRequest();
   const { getAuthUser } = useAuth();
@@ -88,24 +88,24 @@ const Auth = () => {
     setModalOpen(false);
   };
 
-  const confirmAction =async (groupChatName, selectedUsers) => {
+  const confirmAction = async (groupChatName, selectedUsers) => {
     console.log(groupChatName, selectedUsers);
     const token = getAuthUser("token");
-        console.log(token);
-        const header = {
-          Authorization: `Bearer ${token}`,
-        };
+    console.log(token);
+    const header = {
+      Authorization: `Bearer ${token}`,
+    };
 
-        try {
-          const response = await axios.post(
-            "https://chat-app-backend-x0hh.onrender.com/api/v1/chat/groupChat",
-            {
-              name: groupChatName,
-              members: selectedUsers,
-            },
-            { headers:header}
-          );
-  console.log(response);
+    try {
+      const response = await axios.post(
+        "https://chat-app-backend-x0hh.onrender.com/api/v1/chat/groupChat",
+        {
+          name: groupChatName,
+          members: selectedUsers,
+        },
+        { headers: header }
+      );
+      console.log("group", response);
       if (response.status === 201) {
         toast.success("Group created successfully");
       } else {
@@ -120,21 +120,21 @@ const Auth = () => {
   const cancelAction = () => {
     closeModal();
   };
-////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////
   return (
     <div className="grid grid-cols-9">
       {isScreenSmall ? null : (
         <div className="col-span-2">
-          <Sidebar openModal={openModal}/>
+          <Sidebar openModal={openModal} />
         </div>
       )}
       <div className={isScreenSmall ? "col-span-9" : "col-span-7"}>
-      <NewGroup
-        show={modalOpen}
-        onClose={closeModal}
-        onConfirm={confirmAction}
-        onCancel={cancelAction}
-      />
+        <NewGroup
+          show={modalOpen}
+          onClose={closeModal}
+          onConfirm={confirmAction}
+          onCancel={cancelAction}
+        />
         <Routes>
           <Route path="/*" element={<MsgsContainer />}>
             <Route path="userchat/" element={<UserChat />} />
@@ -143,7 +143,6 @@ const Auth = () => {
         </Routes>
       </div>
     </div>
-   
   );
 };
 
