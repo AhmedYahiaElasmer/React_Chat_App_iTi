@@ -187,7 +187,7 @@ const Auth = () => {
   const user = JSON.parse(
     sessionStorage.getItem("user") || localStorage.getItem("user")
   );
-  console.log(user);
+  // console.log(user);
   ////////////////////////////////////////////////////////////////////////////////////
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -223,8 +223,7 @@ const Auth = () => {
               />
             }
           >
-            <Route path="waiting" element={<Error />} />
-            <Route path="userchat/" element={<UserChat />} />
+            <Route path="userchat/*" element={<UserChat />} />
             <Route path="chatroom" element={<ChatRoom />} />
           </Route>
         </Routes>

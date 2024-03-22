@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 
 function LoginComponent() {
   return (
-    <div className="min-h-full text-white md:flex md:flex-col md:justify-between md:items-center lg:pt-14 lg:pb-24 md:py-14 hidden bgc">
+    <div className="min-h-full text-white md:flex md:flex-col md:justify-evenly md:items-center lg:pt-14 lg:pb-24 md:py-14 hidden bgc">
       <div className="flex flex-col lg:gap-7  justify-center items-center">
         <div>
           <WhiteLogo />
         </div>
         <div className="flex flex-col justify-center items-center gap-1 ">
           <h1 className="text-5xl tracking-[.15em] font-semibold">
-          TYPING.... 
+            TYPING....
           </h1>
           <p className="font-thin text-base tracking-wider">
             Connect to the world in few touches
