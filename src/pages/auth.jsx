@@ -17,7 +17,7 @@ import axios from "axios";
 const Auth = () => {
   const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 1100);
 
-  const { setAllUsers, allUsers } = useAllUsers();
+  // const { setAllUsers, allUsers } = useAllUsers();
   const { setAllUsers, allUsers } = useAllUsers();
   const { setAllChats, allChats } = useChats();
   const [selectedUsers, setSelectedUsers] = useState(false);
@@ -97,11 +97,11 @@ const Auth = () => {
               // console.log(e_.userId);
               if (member._id === e_.userId) {
                 // console.log("true");
-                chat.member.isOnline = true;
+                member.isOnline = true;
               }
             });
           });
-          console.log(allChats);
+          // console.log(allChats);
         });
 
         // console.log(allUsers);
