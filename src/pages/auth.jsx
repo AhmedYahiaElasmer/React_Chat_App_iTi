@@ -13,6 +13,7 @@ import { SocketContext } from "../context/SocketContext";
 import NewGroup from "../component/modal/NewGroup";
 import toast from "react-hot-toast";
 import axios from "axios";
+import UserProfileModal from "../component/modal/UserProfile";
 
 
 const Auth = () => {
@@ -135,11 +136,23 @@ const Auth = () => {
     closeModal();
   };
 ////////////////////////////////////////////////////////////////////////////////
+const [ProfilemodalOpen, setProfileModalOpen] = useState(false);
+  const openProfileModal = () => {
+    setProfileModalOpen(true);
+  };
+
+  const closeProfileModal = () => {
+    setProfileModalOpen(false);
+  };
+
+  const user = JSON.parse(sessionStorage.getItem("user")||localStorage.getItem("user")); 
+  console.log(user);
+////////////////////////////////////////////////////////////////////////////////////
   return (
     <div className="grid grid-cols-9">
       {isScreenSmall ? null : (
         <div className="col-span-2">
-          <Sidebar openModal={openModal}/>
+          <Sidebar openModal={openModal} openProfileModal={openProfileModal}/>
         </div>
       )}
       <div className={isScreenSmall ? "col-span-9" : "col-span-7"}>
@@ -149,9 +162,16 @@ const Auth = () => {
         onConfirm={confirmAction}
         onCancel={cancelAction}
       />
+      {/* ////////////////////////////////////// */}
+     
+        <UserProfileModal
+          show={ProfilemodalOpen}
+          onClose={closeProfileModal}
+          user={user} />
+       
         <Routes>
 
-          <Route path="/*" element={<MsgsContainer />}>
+          <Route path="/*" element={<MsgsContainer openModal={openModal} openProfileModal={openProfileModal}/>}>
             <Route path="userchat/" element={<UserChat />} />
             <Route path="chatroom" element={<ChatRoom />} />
           </Route>
