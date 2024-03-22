@@ -3,7 +3,8 @@ import Avatar from "../Avatar";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 const Sender = (props) => {
-  const { content, updatedAt } = props.message;
+  
+  const { content, updatedAt=Date.now() } = props.message;
   TimeAgo.addLocale(en);
   const timeAgo = new TimeAgo("en-US");
 
@@ -12,7 +13,7 @@ const Sender = (props) => {
     <div className="chat chat-end">
       <div className="chat-bubble">{content}</div>
       <time className="chat-footer text-xs opacity-50">
-        {timeAgo.format(new Date(updatedAt))}
+        {/* {timeAgo.format(new Date(updatedAt))} */}
       </time>
 
       <div className="chat-footer opacity-50">

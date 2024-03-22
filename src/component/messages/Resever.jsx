@@ -4,6 +4,7 @@ import Avatar from "../Avatar";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 const Resever = (props) => {
+  // console.log(props);
   const { content, sender, updatedAt } = props.message;
   // console.log(updatedAt);
   // TimeAgo.addDefaultLocale(en);

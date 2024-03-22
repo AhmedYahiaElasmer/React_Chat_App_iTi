@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useRequest from "../../hooks/useRequest";
 import { SocketContext } from "../../context/SocketContext";
+
 const ChatInput = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -16,20 +17,21 @@ const ChatInput = () => {
 
 
   const id = searchParams.get("id");
-  const userId = JSON.parse(getAuthUser("user"))._id;
+  const user = JSON.parse(getAuthUser("user"));
 
-  const handleSendMessage = async (e) => {
+//   const handleSendMessage = async (e) => {
 
-    if (message.trim() !== "") {
-      setMessages([...messages, message]);
-      setMessage("");
-    }
-  };
+//     if (message.trim() !== "") {
+//       setMessages([...messages, message]);
+//       setMessage("");
+//     }
+//   };
 
   const sendMessage = async (e) => {
     if (!e.trim().length) return;
-
+    setMessage("");
     try {
+      socket.emit("sendMessage", e , id , user);
         const header = {
             Authorization: `Bearer ${token}`,
           };
@@ -42,8 +44,7 @@ const ChatInput = () => {
               chatId: id,
             },
           });
-          setMessage("");
-          socket.emit("sendMessage", e , id , userId);
+
     } catch (error) {
         console.log(error);   
     }

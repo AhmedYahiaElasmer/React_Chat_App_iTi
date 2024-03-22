@@ -20,7 +20,6 @@ const Auth = () => {
   // const { setAllUsers, allUsers } = useAllUsers();
   const { setAllUsers, allUsers } = useAllUsers();
   const { setAllChats, allChats } = useChats();
-  const [selectedUsers, setSelectedUsers] = useState(false);
   const { requestApi } = useRequest();
   const { getAuthUser } = useAuth();
   const socket = useContext(SocketContext);
@@ -55,7 +54,7 @@ const Auth = () => {
           headers: header,
           signal: abortCtrl.signal,
         });
-        console.log("responseChat", responseChat);
+        // console.log("responseChat", responseChat);
         setAllChats(responseChat.chat);
         /////////////////////////////////////////////////////
       } catch (error) {
@@ -81,8 +80,7 @@ const Auth = () => {
       socket.emit("addUser", userId);
       socket.on("getUsersOnLine", (e) => {
         // console.log(allUsers,"GGGG");
-        console.log(e);
-        let newUser;
+        // console.log(e);
         e.map((e_) => {
           allUsers.map((user) => {
             // console.log({user,e_});
