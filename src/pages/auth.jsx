@@ -80,6 +80,7 @@ const Auth = () => {
       socket.emit("addUser", userId);
       socket.on("getUsersOnLine", (e) => {
         // console.log(allUsers,"GGGG");
+        console.log(e);
         let newUser;
         e.map((e_) => {
           allUsers.map((user) => {
@@ -97,12 +98,12 @@ const Auth = () => {
               // console.log(e_.userId);
               if(member._id === e_.userId){
                 // console.log("true");
-                chat.member.isOnline = true;
+                chat.isOnline = true;
               }
             })
         
           })
-          console.log(allChats);
+          // console.log(allChats);
         });
 
         // console.log(allUsers);

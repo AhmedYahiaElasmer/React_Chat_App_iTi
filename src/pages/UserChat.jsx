@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // import Message from "../component/messages/Message";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useRequest from "../hooks/useRequest";
 import useAuth from "../hooks/useAuth";
 import { useAllUsers, useChats, useConversation } from "../zustand/zustand";
@@ -9,6 +9,7 @@ import Sender from "../component/messages/Sender";
 import Resever from "../component/messages/Resever";
 import InfiniteScroll from "react-infinite-scroll-component";
 import AllUsers from "../component/sidbar/AllUsers";
+import { SocketContext } from "../context/SocketContext";
 
 function UserChat() {
   const { requestApi } = useRequest();
@@ -16,13 +17,14 @@ function UserChat() {
   const [page, setPage] = useState(0);
   const user = JSON.parse(getAuthUser("user"));
   const {
-    // messages,
-    // setMessages,
+    messages,
+    setMessages,
     selectedConversation,
     setSelectedConversation,
   } = useConversation();
 
   const { setAllChats, allChats } = useChats();
+  const socket = useContext(SocketContext);
 
 
   
@@ -86,6 +88,7 @@ function UserChat() {
         // console.log(response);
         if (!response) return;
         const chatData = response.allMessages;
+        chatData.reverse()
         setSelectedConversation([
           ...selectedConversation,
           {
@@ -112,6 +115,20 @@ function UserChat() {
 
     return () => abortCtrl.abort();
   }, [id, user_]);
+
+
+  useEffect(() => {
+    socket.emit("joinChat",id)
+
+    socket.on("getMessage",(m , sender)=>{
+      console.log(m , sender);
+    })
+
+    return () => {
+      socket.off("joinChat",id);
+      socket.off("getMessage");
+    }
+  },[id])
   // console.log("selectedConversation", selectedConversation);
   return (
     <>

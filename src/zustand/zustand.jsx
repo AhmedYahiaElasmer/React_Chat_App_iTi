@@ -3,6 +3,7 @@ import { create } from "zustand";
 export const useConversation = create((set) => ({
   selectedConversation: [],
   setSelectedConversation: (selectedConversation) =>{
+    console.log("Updating selectedConversation:", selectedConversation);
     set({ selectedConversation })
   },
     
@@ -16,7 +17,7 @@ export const useConversation = create((set) => ({
 export const useChats = create((set) => ({
   allChats: [],
   setAllChats: (allChats) => {
-    console.log("Updating AllChats:", allChats);
+    // console.log("Updating AllChats:", allChats);
     set({ allChats });
   },
 }));

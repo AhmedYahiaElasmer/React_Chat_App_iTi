@@ -27,10 +27,8 @@ const AllUsers = (props) => {
             {isChat ? (
               <>
                 {allChats?.map((chat) => (
-                  
                   <Link key={chat._id} to={`/home/userchat/?id=${chat._id}`}>
-                    {/* {console.log(chat)} */}
-                    <User user={chat} isChat={isChat} mode={chat.members.isOnline} />
+                    <User user={chat} isChat={isChat}  />
                   </Link>
                 ))}
               </>
