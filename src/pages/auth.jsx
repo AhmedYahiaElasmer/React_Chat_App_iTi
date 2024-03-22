@@ -17,6 +17,7 @@ import axios from "axios";
 const Auth = () => {
   const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 1100);
 
+  // const { setAllUsers, allUsers } = useAllUsers();
   const { setAllUsers, allUsers } = useAllUsers();
   const { setAllChats, allChats } = useChats();
   const [selectedUsers, setSelectedUsers] = useState(false);
@@ -92,17 +93,15 @@ const Auth = () => {
             }
           });
 
-          allChats.map((chat)=>{
-            
-            chat.members.map((member)=>{
+          allChats.map((chat) => {
+            chat.members.map((member) => {
               // console.log(e_.userId);
-              if(member._id === e_.userId){
+              if (member._id === e_.userId) {
                 // console.log("true");
-                chat.isOnline = true;
+                member.isOnline = true;
               }
-            })
-        
-          })
+            });
+          });
           // console.log(allChats);
         });
 
@@ -118,7 +117,7 @@ const Auth = () => {
     return () => {
       socket.off("getUsersOnLine");
     };
-  }, [allUsers , allChats]);
+  }, [allUsers, allChats]);
 
   useEffect(() => {
     const handleResize = () => {

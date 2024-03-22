@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import Avatar from "../Avatar";
 
 const User = (props) => {
-  const { user, isChat = false, initImage = user.image ,mode } = props;
+  const { user, isChat = false, initImage = user.image, mode } = props;
   const { getAuthUser } = useAuth();
   const { _id } = JSON.parse(getAuthUser("user"));
   // console.log(_id);
@@ -20,17 +20,22 @@ const User = (props) => {
           user.members.map((member) =>
             member._id == _id ? null : (
               <>
+                {/* {console.log(member)} */}
                 <Avatar
                   isMessage={true}
                   initImage={isChat ? member.image : initImage}
-                  mode={mode? "online":"offline"}
+                  mode={member.isOnline ? "online" : "offline"}
                 />
               </>
             )
           )
         )
       ) : (
-        <Avatar isMessage={true} initImage={initImage} mode={mode? "online":"offline"} />
+        <Avatar
+          isMessage={true}
+          initImage={initImage}
+          mode={mode ? "online" : "offline"}
+        />
       )}
 
       <div className="chat-header">

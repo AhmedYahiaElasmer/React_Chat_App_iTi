@@ -15,7 +15,9 @@ const Sender = (props) => {
         {timeAgo.format(new Date(updatedAt))}
       </time>
 
-      {/* <div className="chat-footer opacity-50">Seen at 12:46</div> */}
+      <div className="chat-footer opacity-50">
+        {/* Seen at 12:46 <span className="text-blue-700">**</span> */}
+      </div>
     </div>
   );
 };
