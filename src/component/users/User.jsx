@@ -8,9 +8,7 @@ const User = (props) => {
   const { user, isChat = false, initImage = user.image, mode } = props;
   const { getAuthUser } = useAuth();
   const { _id } = JSON.parse(getAuthUser("user"));
-  // console.log(_id);
-  // console.log(user);
-  // console.log(mode);
+
   return (
     <div className="chat chat-start">
       {isChat ? (

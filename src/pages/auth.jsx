@@ -75,19 +75,13 @@ const Auth = () => {
   }, []);
 
   useEffect(() => {
-    // if(allUsers.length) setSelectedUsers(true)
-    // console.log(allUsers);
     if (allUsers.length) {
       socket.emit("addUser", userId);
       socket.on("getUsersOnLine", (e) => {
-        // console.log(allUsers,"GGGG");
-        // console.log(e);
         e.map((e_) => {
           allUsers.map((user) => {
-            // console.log({user,e_});
-            if (user.id === e.userId) {
+            if (user._id === e_.userId) {
               user.isOnline = true;
-              // console.log("true");
               return user;
             }
           });
@@ -95,7 +89,7 @@ const Auth = () => {
           allChats.map((chat) => {
             chat.members.map((member) => {
               // console.log(e_.userId);
-              if (member.id === e.userId) {
+              if (member._id === e_.userId) {
                 // console.log("true");
                 member.isOnline = true;
               }

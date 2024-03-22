@@ -18,7 +18,7 @@ const MsgsContainer = ({openModal, openProfileModal}) => {
       {/* navbar */}
       <ChatNavBar openModal={openModal} openProfileModal={openProfileModal} className='nav'/>
       {/* msg-container */}
-      <div className="px-4  flex-1 flex flex-col overflow  w-full messages-scroll" id="scroll" ref={lastMessageRef}>
+      <div className="px-4  flex-1 flex flex-col overflow  w-full messages-scroll" id="scroll" >
         <Outlet/>
         
           {/* <ChatBar /> */}
