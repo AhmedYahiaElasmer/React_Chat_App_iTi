@@ -182,7 +182,7 @@ const Auth = () => {
   };
 
 ////////////////////////////////////////////////////////////////////////////////
-const [ProfilemodalOpen, setProfileModalOpen] = useState(false);
+const [ProfilemodalOpen,setProfileModalOpen] = useState(false);
   const openProfileModal = () => {
     setProfileModalOpen(true);
   };
@@ -191,8 +191,8 @@ const [ProfilemodalOpen, setProfileModalOpen] = useState(false);
     setProfileModalOpen(false);
   };
 
-  const user = JSON.parse(sessionStorage.getItem("user")||localStorage.getItem("user")); 
-  console.log(user);
+  const user =JSON.parse(sessionStorage.getItem("user")||localStorage.getItem("user")); 
+  console.log(user)
 ////////////////////////////////////////////////////////////////////////////////////
 
   ////////////////////////////////////////////////////////////////////////////////
