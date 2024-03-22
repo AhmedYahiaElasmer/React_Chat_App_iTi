@@ -9,7 +9,7 @@ const MsgsContainer = () => {
       {/* navbar */}
       <ChatNavBar className='nav'/>
       {/* msg-container */}
-      <div className="px-4  flex-1 flex flex-col overflow  w-full messages-scroll">
+      <div className="px-4  flex-1 flex flex-col scrollbar w-full messages-scroll">
         <Outlet/>
         
           {/* <ChatBar /> */}

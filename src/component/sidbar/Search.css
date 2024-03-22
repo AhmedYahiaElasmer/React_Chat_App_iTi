@@ -1,45 +1,17 @@
 .search{
-    border: 2px solid #5a5a5a !important;
-    border-radius: 10px !important;
-    width: 90% !important;
+  border: 2px solid #5a5a5a !important;
+  border-radius: 10px !important;
+  width: 90% !important;
 }
 
 .tab {
-    transition: border-bottom 0.3s ease;
-  }
-  
-  .text-white-500 {
-    color: #ffffff; 
-  }
-  
-  .font-bold {
-    font-weight: bold;
-  }
-  .scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: #555555 #272727;
-    overflow-y: scroll;
-  }
-  
-  .scrollbar::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  
-  .scrollbar::-webkit-scrollbar-thumb {
-    background-color: #555555;
-    border-radius: 5px;
-  }
-  
-  .scrollbar::-webkit-scrollbar-track {
-    background-color: #272727;
-  }
-  
-  .scrollbar::-webkit-scrollbar-button {
-    display: none; 
-  }
-  
+  transition: border-bottom 0.3s ease;
+}
 
-  .scrollbar {
-    margin-right: -20px;
-  }
+.text-white-500 {
+  color: #ffffff; 
+}
+
+.font-bold {
+  font-weight: bold;
+}
