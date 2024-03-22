@@ -223,8 +223,7 @@ const Auth = () => {
               />
             }
           >
-            <Route path="waiting" element={<Error />} />
-            <Route path="userchat/" element={<UserChat />} />
+            <Route path="userchat/*" element={<UserChat />} />
             <Route path="chatroom" element={<ChatRoom />} />
           </Route>
         </Routes>
