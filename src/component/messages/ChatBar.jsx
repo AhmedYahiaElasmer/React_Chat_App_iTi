@@ -12,20 +12,20 @@ const ChatBar = () => {
   const { requestApi } = useRequest();
   const handlerSendMessage= async(e)=>{
     if(!e.trim().length) return;
+    console.log(e);
 
+  //   const header = {
+  //     Authorization: `Bearer ${token}`,
+  //   };
 
-    const header = {
-      Authorization: `Bearer ${token}`,
-    };
-
-  const response = await  requestApi('/message/sendMessage',{
-      method: "POST",
-      headers: header,
-      data:{
-        content:e,
-        chatId:""
-      }
-    })
+  // const response = await  requestApi('/message/sendMessage',{
+  //     method: "POST",
+  //     headers: header,
+  //     data:{
+  //       content:e,
+  //       chatId:""
+  //     }
+  //   })
 
 
   }

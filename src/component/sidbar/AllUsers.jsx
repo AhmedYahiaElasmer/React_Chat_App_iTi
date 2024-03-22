@@ -11,6 +11,7 @@ const AllUsers = (props) => {
   const { allChats } = useChats();
   const { loading_ } = useRequest();
   // console.log(allChats);
+  // console.log(allUsers);
   return (
     <>
       {loading_ ? (
@@ -27,6 +28,7 @@ const AllUsers = (props) => {
               <>
                 {allChats?.map((chat) => (
                   <Link key={chat._id} to={`/home/userchat/?id=${chat._id}`}>
+                    {/* {console.log(chat)} */}
                     <User user={chat} isChat={isChat} />
                   </Link>
                 ))}
@@ -35,7 +37,7 @@ const AllUsers = (props) => {
               <>
                 {allUsers?.map((user) => (
                   <Link key={user._id} to={`/home/userchat/?user_=${user._id}`}>
-                    <User user={user} isChat={isChat} />
+                    <User user={user} isChat={isChat} mode={user.isOnline} />
                   </Link>
                 ))}
               </>
