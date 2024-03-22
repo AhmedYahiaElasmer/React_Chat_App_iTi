@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Sidebar from "../component/home/Sidebar";
 import MsgsContainer from "../component/home/MsgsContainer";
 import UserChat from "./UserChat";
@@ -9,7 +9,7 @@ import useRequest from "../hooks/useRequest";
 import useAuth from "../hooks/useAuth";
 import Drawer from "../component/home/Drawer";
 import "./auth.css";
-import { connectionSocket } from "../utils/socketMethods";
+import { SocketContext } from "../context/SocketContext";
 import NewGroup from "../component/modal/NewGroup";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -18,9 +18,12 @@ const Auth = () => {
   const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 1100);
 
   const { setAllUsers, allUsers } = useAllUsers();
+  const { setAllUsers, allUsers } = useAllUsers();
   const { setAllChats, allChats } = useChats();
+  const [selectedUsers, setSelectedUsers] = useState(false);
   const { requestApi } = useRequest();
   const { getAuthUser } = useAuth();
+  const socket = useContext(SocketContext);
 
   const userId = JSON.parse(getAuthUser("user"))._id;
   // console.log(JSON.parse(getAuthUser("user"))._id);
@@ -43,8 +46,9 @@ const Auth = () => {
         if (!responseUser?.users) return;
 
         const usersData = responseUser.users;
+        // console.log(usersData);
         setAllUsers(usersData);
-        console.log(allUsers);
+        // console.log(allUsers);
         //////////////////////////////////////////////////////
         const responseChat = await requestApi(`/chat`, {
           method: "GET",
@@ -60,8 +64,59 @@ const Auth = () => {
     };
 
     fetchData();
-    return () => abortCtrl.abort();
+
+    // socket.once("addUser", userId)
+    return () => {
+      // socket.disconnect();
+      // socket.remove;
+
+      abortCtrl.abort();
+    };
   }, []);
+
+  useEffect(() => {
+    // if(allUsers.length) setSelectedUsers(true)
+    // console.log(allUsers);
+    if (allUsers.length) {
+      socket.emit("addUser", userId);
+      socket.on("getUsersOnLine", (e) => {
+        // console.log(allUsers,"GGGG");
+        let newUser;
+        e.map((e_) => {
+          allUsers.map((user) => {
+            // console.log({user,e_});
+            if (user._id === e_.userId) {
+              user.isOnline = true;
+              // console.log("true");
+              return user;
+            }
+          });
+
+          allChats.map((chat) => {
+            chat.members.map((member) => {
+              // console.log(e_.userId);
+              if (member._id === e_.userId) {
+                // console.log("true");
+                chat.member.isOnline = true;
+              }
+            });
+          });
+          console.log(allChats);
+        });
+
+        // console.log(allUsers);
+        // console.log(mappingUser);
+        // const finallyOnline = mappingUser.filter((e_)=>e_ !== undefined);
+        // console.log(finallyOnline);
+        // setAllUsers(finallyOnline);
+        // console.log(allUsers);
+      });
+    }
+
+    return () => {
+      socket.off("getUsersOnLine");
+    };
+  }, [allUsers, allChats]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -71,6 +126,9 @@ const Auth = () => {
     window.addEventListener("resize", handleResize);
     // const socketConnection = connectionSocket();
     // socketConnection.emit("addUser", userId);
+
+    ///// Socket Connection
+
     return () => {
       window.removeEventListener("resize", handleResize);
       // socketConnection.disconnect();
@@ -105,7 +163,7 @@ const Auth = () => {
         },
         { headers: header }
       );
-      console.log("group", response);
+      console.log(response);
       if (response.status === 201) {
         toast.success("Group created successfully");
       } else {

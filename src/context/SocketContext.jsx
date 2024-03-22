@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { connectionSocket } from "../utils/socketMethods";
+import { socket } from "../config/socket";
 
+export const socket_ = socket();
 
-const connection = connectionSocket();
-
-export const SocketContext = createContext  ();
+export const SocketContext = createContext();
