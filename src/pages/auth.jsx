@@ -14,6 +14,7 @@ import NewGroup from "../component/modal/NewGroup";
 import toast from "react-hot-toast";
 import axios from "axios";
 import UserProfileModal from "../component/modal/UserProfile";
+import Error from "./Error";
 
 const Auth = () => {
   const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 1100);
@@ -222,6 +223,7 @@ const Auth = () => {
               />
             }
           >
+            <Route path="waiting" element={<Error />} />
             <Route path="userchat/" element={<UserChat />} />
             <Route path="chatroom" element={<ChatRoom />} />
           </Route>
