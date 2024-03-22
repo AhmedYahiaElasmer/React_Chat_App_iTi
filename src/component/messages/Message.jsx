@@ -12,9 +12,6 @@ const Message = () => {
   const { getAuthUser } = useAuth();
   const user = JSON.parse(getAuthUser("user"));
 
-  // console.log(user._id);
-  // setMessages("");
-
   return (
     <>
       {messages.map((message) => (

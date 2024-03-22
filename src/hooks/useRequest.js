@@ -18,8 +18,6 @@ export default function useRequest() {
         }
         setLoading(false);
         return response;
-
-
     }
 
     return {data_ , loading_ , error ,requestApi}
