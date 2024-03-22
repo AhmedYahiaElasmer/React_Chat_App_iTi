@@ -13,7 +13,6 @@ import { SocketContext } from "../context/SocketContext";
 import NewGroup from "../component/modal/NewGroup";
 import toast from "react-hot-toast";
 import axios from "axios";
-import UserProfileModal from "../component/modal/UserProfile";
 
 const Auth = () => {
   const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 1100);
@@ -82,7 +81,6 @@ const Auth = () => {
       socket.emit("addUser", userId);
       socket.on("getUsersOnLine", (e) => {
         // console.log(allUsers,"GGGG");
-        console.log(e);
         let newUser;
         e.map((e_) => {
           allUsers.map((user) => {
@@ -180,45 +178,23 @@ const Auth = () => {
   const cancelAction = () => {
     closeModal();
   };
-
-////////////////////////////////////////////////////////////////////////////////
-const [ProfilemodalOpen, setProfileModalOpen] = useState(false);
-  const openProfileModal = () => {
-    setProfileModalOpen(true);
-  };
-
-  const closeProfileModal = () => {
-    setProfileModalOpen(false);
-  };
-
-  const user = JSON.parse(sessionStorage.getItem("user")||localStorage.getItem("user")); 
-  console.log(user);
-////////////////////////////////////////////////////////////////////////////////////
-
   ////////////////////////////////////////////////////////////////////////////////
-
-
-          <Sidebar openModal={openModal} openProfileModal={openProfileModal}/>
+  return (
+    <div className="grid grid-cols-9">
+      {isScreenSmall ? null : (
+        <div className="col-span-2">
+          <Sidebar openModal={openModal} openProfileModal={openProfileModal} />
         </div>
       )}
       <div className={isScreenSmall ? "col-span-9" : "col-span-7"}>
-      <NewGroup
-        show={modalOpen}
-        onClose={closeModal}
-        onConfirm={confirmAction}
-        onCancel={cancelAction}
-      />
-      {/* ////////////////////////////////////// */}
-     
-        <UserProfileModal
-          show={ProfilemodalOpen}
-          onClose={closeProfileModal}
-          user={user} />
-       
+        <NewGroup
+          show={modalOpen}
+          onClose={closeModal}
+          onConfirm={confirmAction}
+          onCancel={cancelAction}
+        />
         <Routes>
-
-          <Route path="/*" element={<MsgsContainer openModal={openModal} openProfileModal={openProfileModal}/>}>
-
+          <Route path="/*" element={<MsgsContainer />}>
             <Route path="userchat/" element={<UserChat />} />
             <Route path="chatroom" element={<ChatRoom />} />
           </Route>
