@@ -5,7 +5,7 @@ import Toggle_User_Group from "../sidbar/Toggle_User_Group";
 import SidBarHeader from "../sidbar/SidBarHeader";
 import AllUsers from "../sidbar/AllUsers";
 import './Nav.css'
-const Drawer = () => {
+const Drawer = ({openModal, openProfileModal}) => {
   return (
     <div className="drawer">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -18,7 +18,7 @@ const Drawer = () => {
       <div className="drawer-side ">
         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
         <div className="bgside h-lvh overflow-hidden text-white  ">
-      <SidBarHeader />
+      <SidBarHeader openModal={openModal} openProfileModal={openProfileModal} />
       <SearchBar />
       <Toggle_User_Group />
       <AllUsers />

@@ -4,10 +4,10 @@ import SidBarHeader from "../sidbar/SidBarHeader";
 // import AllUsers from "../sidbar/AllUsers";
 
 const Sidebar = (props) => {
-  const {openModal} =props
+  const {openModal,openProfileModal} =props
   return (
     <div className="bgside h-lvh overflow-hidden text-white  ">
-      <SidBarHeader openModal={openModal}/>
+      <SidBarHeader openModal={openModal} openProfileModal={openProfileModal}/>
       <SearchBar />
       <Toggle_User_Group />
       {/* <AllUsers /> */}
