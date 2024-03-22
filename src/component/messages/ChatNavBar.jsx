@@ -10,7 +10,7 @@ import "./message.css";
 import Avatar from "../Avatar";
 import { useConversation } from "../../zustand/zustand";
 import { useParams } from "react-router-dom";
-const ChatNavBar = () => {
+const ChatNavBar = ({openModal, openProfileModal}) => {
   const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 1100);
   const { selectedConversation } = useConversation();
   let { id } = useParams();
@@ -48,7 +48,7 @@ const ChatNavBar = () => {
           </p>
           {isScreenSmall ? (
             <p>
-              <Drawer className="z-3" />
+              <Drawer openModal={openModal} openProfileModal={openProfileModal} className="z-3" />
             </p>
           ) : (
             <p>

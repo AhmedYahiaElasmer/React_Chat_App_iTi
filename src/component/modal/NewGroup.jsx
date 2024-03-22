@@ -81,7 +81,7 @@ function NewGroup({ show, onClose, onConfirm, onCancel }) {
               id="group-chat-name"
               value={groupChatName}
               onChange={handleGroupChatNameChange}
-              className="mt-1 p-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full"
+              className="mt-1 p-2 border border-gray-300  rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full"
             />
           </div>
           <div className="mt-3">
@@ -96,7 +96,7 @@ function NewGroup({ show, onClose, onConfirm, onCancel }) {
               id="user-search"
               value={search}
               onChange={handleUserSearchChange}
-              className="mt-1 p-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full"
+              className="mt-1 p-2 border border-gray-300  rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full"
             />
             <div className=" mt-3  scrollbar overflow-y-scroll h-44  md:h-56">
               {filteredUsers.map((user) => (
