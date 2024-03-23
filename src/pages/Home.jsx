@@ -8,7 +8,7 @@ import EditDetails from "./EditDetails";
 import { Navigate } from "react-router-dom/dist";
 import Auth from "./auth";
 import { socket_, SocketContext } from "../context/SocketContext";
-import HeroPage from "./Hero";
+// import HeroPage from "./Hero";
 import { useAuthContext } from "../context/AuthContext";
 import { useState } from "react";
 function Home() {

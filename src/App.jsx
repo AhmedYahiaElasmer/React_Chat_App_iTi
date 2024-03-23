@@ -10,7 +10,6 @@ import { useAuthContext } from "./context/AuthContext";
 import { useState } from "react";
 import HeroPage from "./pages/HeroPage";
 
-
 function App() {
   const { authUser } = useAuthContext();
 

@@ -19,7 +19,7 @@ const ChatNavBar = ({ openModal, openProfileModal }) => {
   const [selectedChat, setselectedChat] = useState();
   const { selectedConversation } = useConversation();
   const { setAllChats, allChats } = useChats();
-  const [selectedChat, setselectedChat] = useState();
+  // const [selectedChat, setselectedChat] = useState();
   const { getAuthUser } = useAuth();
   const userId = JSON.parse(getAuthUser("user"))._id;
   const id = searchParams.get("id");

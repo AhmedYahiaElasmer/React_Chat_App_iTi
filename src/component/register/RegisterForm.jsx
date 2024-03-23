@@ -11,9 +11,7 @@ import { signUp } from "../../api/auth";
 import WhiteLogo from "../logo/WhiteLogo";
 import RegisterInput from "./RegisterInput";
 
-
 import { useNavigate } from "react-router-dom";
-
 
 function RegisterForm() {
   const [fileUpload, onFileUpload] = useState("");
@@ -41,11 +39,10 @@ function RegisterForm() {
   const password = useRef({});
   password.current = watch("password", "");
 
-  const onSubmit =  async (data) => {
-    let urlFile=""; //image Url back from Firebase
+  const onSubmit = async (data) => {
+    let urlFile = ""; //image Url back from Firebase
     // console.log(data);
-    const {firstName , password ,email , lastName} = data
-
+    const { firstName, password, email, lastName } = data;
 
     if (fileUpload) urlFile = await UplaodFile("avatar", fileUpload);
 
@@ -54,12 +51,11 @@ function RegisterForm() {
       lastname: lastName,
       email,
       password,
-      image:urlFile
-    })
+      image: urlFile,
+    });
 
     console.log(signUp_);
-    if(signUp_.status ==="Registration successfully") navigate("/")
-    
+    if (signUp_.status === "Registration successfully") navigate("/login");
   };
 
   return (
@@ -162,14 +158,13 @@ function RegisterForm() {
                 pattern: {
                   value:
                     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}$/,
-                  message: `Password must contain at least  one lowercase letter,\n
-                   one uppercase letter, one digit, and one special character`,
+                  message: `should be like Aa!1aaaa`,
                 },
               }}
             />
-            <RegisterInput 
-            className=""
-            type={"password"}
+            <RegisterInput
+              className=""
+              type={"password"}
               label="Confirm Password"
               name="confirmPassword"
               register={register}
