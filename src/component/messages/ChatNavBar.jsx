@@ -16,23 +16,14 @@ import useAuth from "../../hooks/useAuth";
 const ChatNavBar = ({ openModal, openProfileModal }) => {
   const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 1100);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedChat, setselectedChat] = useState();
   const { selectedConversation } = useConversation();
   const { setAllChats, allChats } = useChats();
   const [selectedChat, setselectedChat] = useState();
   const { getAuthUser } = useAuth();
   const userId = JSON.parse(getAuthUser("user"))._id;
   const id = searchParams.get("id");
-  const index = allChats?.findIndex((chat) => chat?._id === id);
 
-  useEffect(() => {
-    console.log("index", index);
-
-    if (index > -1) {
-      setselectedChat(allChats[index]);
-      console.log("index", index);
-    }
-  }, [id]);
-  console.log("selectedChat", selectedChat);
   useEffect(() => {
     const handleResize = () => {
       setIsScreenSmall(window.innerWidth <= 1100);
@@ -44,6 +35,18 @@ const ChatNavBar = ({ openModal, openProfileModal }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  // const selectedChat = allChats[
+  //   allChats.findIndex((chat) => chat._id ===id )
+  // ];
+  const index = allChats?.findIndex((chat) => chat?._id === id);
+  useEffect(() => {
+    console.log("index", index);
+    if (index > -1) {
+      setselectedChat(allChats[index]);
+      console.log("index", index);
+    }
+  }, [id]);
 
   // console.log(selectedChat , id);
 

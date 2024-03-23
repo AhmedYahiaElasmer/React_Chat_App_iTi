@@ -17,6 +17,7 @@ function UserChat() {
       content: "",
       sender: {},
       updatedAt: Date.now(),
+      chat_: "",
     },
   ]);
   const lastMessageRef = useRef();
@@ -103,20 +104,21 @@ function UserChat() {
       // console.log("user_:",user_);
       fetchUser();
     }
-    setMessageSocket([
-      {
-        content: "",
-        sender: {},
-        updatedAt: Date.now(),
-      },
-    ]);
+
+    // setMessageSocket([
+    //   {
+    //     content: "",
+    //     sender: {},
+    //     updatedAt: Date.now(),
+    //   },
+    // ]);
     return () => abortCtrl.abort();
   }, [id, user_]);
 
   useEffect(() => {
     socket.emit("joinChat", id);
 
-    socket.on("getMessage", (m, sender) => {
+    socket.on("getMessage", (m, sender, chat_) => {
       // setMessageSocket([...messageSocket,{
       //   content:m,
       //   sender:sender
@@ -127,6 +129,7 @@ function UserChat() {
         {
           content: m,
           sender: sender,
+          chat_,
           updatedAt: Date.now(),
         },
       ]);
@@ -150,6 +153,7 @@ function UserChat() {
   return (
     <>
       <div className="flex flex-col ">
+        {console.log(messageSocket)}
         {selectedConversation[
           selectedConversation.findIndex((chat) => chat.chat_ === id)
         ]?.messages[0].map((message) => (
@@ -166,14 +170,15 @@ function UserChat() {
           </div>
         ))}
 
-        {messageSocket.map(
-          (message) =>
-            message.content &&
-            (user._id === message.sender._id ? (
-              <Sender message={message} />
-            ) : (
-              <Resever message={message} />
-            ))
+        {messageSocket.map((message) =>
+          id === message.chat_
+            ? message.content &&
+              (user._id === message.sender._id ? (
+                <Sender message={message} />
+              ) : (
+                <Resever message={message} />
+              ))
+            : null
         )}
       </div>
       {/* </InfiniteScroll> */}

@@ -1,32 +1,51 @@
-import React, { useState } from 'react';
-import './slider.css'; // Assume you have a CSS file for styling
+import React, { useState, useEffect } from 'react'
 
-const Slide = ({ imageUrl }) => {
-  const [rotation, setRotation] = useState(0);
-  const [paragraph, setParagraph] = useState('First paragraph'); // Initial paragraph text
+export default function Slider({ images }) {
+  const [currentSlide, setCurrentSlide] = useState(1) // Change this line
+  const [isAnimating, setIsAnimating] = useState(false)
 
-  const rotateRight = () => {
-    setRotation(rotation + 120);
-    setParagraph('Next paragraph'); // Change the paragraph text
-  };
+  useEffect(() => {
+    if (isAnimating) {
+      const timeout = setTimeout(() => {
+        setIsAnimating(false)
+      }, 500)
+      return () => clearTimeout(timeout)
+    }
+  }, [isAnimating])
 
-  const rotateLeft = () => {
-    setRotation(rotation - 120);
-    setParagraph('Previous paragraph'); // Change the paragraph text
-  };
+  const handlePrevClick = () => {
+    setIsAnimating(true)
+    setCurrentSlide((prevSlide) => (prevSlide === 0 ? images.length - 1 : prevSlide - 1))
+  }
 
+  const handleNextClick = () => {
+    setIsAnimating(true)
+    setCurrentSlide((prevSlide) => (prevSlide === images.length - 1 ? 0 : prevSlide + 1))
+  }
+
+  console.log(Slider)
   return (
-    <div className="slider-container">
-      <div className="slider-image" style={{ transform: `rotate(${rotation}deg)` }}>
-        <img src={imageUrl} alt="Slider" />
-      </div>
-      <div className="slider-buttons">
-        <button onClick={rotateLeft}>Left</button>
-        <button onClick={rotateRight}>Right</button>
-      </div>
-      <p className="slider-paragraph">{paragraph}</p>
+    <div className="carousel w-full overflow-hidden sm:flex sm:justify-between sm:items-center">
+      {images.map((image, index) => (
+        <div
+          key={index}
+          id={`slide${index + 1}`}
+          className={`carousel-item relative w-full flex justify-center items-center ${
+            currentSlide === index ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+          style={{ transition: 'opacity 500ms' }}
+        >
+          <img src={image} className="w-[30%] h-auto mt-10" />
+          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+            <a href={`#slide${index === 0 ? images.length : index}`} className="btn btn-circle" onClick={handlePrevClick}>
+              ❮
+            </a>
+            <a href={`#slide${index === images.length - 1 ? 1 : index + 2}`} className="btn btn-circle" onClick={handleNextClick}>
+              ❯
+            </a>
+          </div>
+        </div>
+      ))}
     </div>
-  );
-};
-
-export default Slide;
+  )
+}

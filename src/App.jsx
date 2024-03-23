@@ -8,7 +8,8 @@ import Error from "./pages/Error";
 import Toaster from "react-hot-toast";
 import { useAuthContext } from "./context/AuthContext";
 import { useState } from "react";
-import HeroPage from "./pages/Hero";
+import HeroPage from "./pages/HeroPage";
+
 
 function App() {
   const { authUser } = useAuthContext();

@@ -5,7 +5,7 @@ import AllUsers from "../sidbar/AllUsers";
 // import UsersComponent from "./UsersComponent";
 // import ChatsComponent from "./ChatsComponent";
 
-const Toggle_User_Group = () => {
+const Toggle_User_Group = ({ users }) => {
   const [selectedTab, setSelectedTab] = useState("users");
 
   const handleTabClick = (tab) => {
@@ -45,7 +45,7 @@ const Toggle_User_Group = () => {
         <p>Chats</p>
       </div>
       {selectedTab === "users" ? (
-        <AllUsers isChat={false} />
+        <AllUsers isChat={false}  users = {users}/>
       ) : (
         <AllUsers isChat={true} />
       )}
