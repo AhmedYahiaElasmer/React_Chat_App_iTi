@@ -34,7 +34,6 @@ function UserChat() {
 
   const { setAllChats, allChats } = useChats();
   const socket = useContext(SocketContext);
-  
 
   // let { id ,user_ } = useParams();
 
@@ -45,7 +44,7 @@ function UserChat() {
   const user_ = searchParams.get("user_");
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -65,7 +64,7 @@ function UserChat() {
       console.log(response);
       setSearchParams({ id: response?.chat._id });
       if (response?.chat) {
-        if (!allChats.some((chat) => chat._id === response?.chat._id)) {
+        if (!allChats?.some((chat) => chat._id === response?.chat._id)) {
           setAllChats([...allChats, response.chat]);
         }
       }
@@ -104,7 +103,13 @@ function UserChat() {
       // console.log("user_:",user_);
       fetchUser();
     }
-
+    setMessageSocket([
+      {
+        content: "",
+        sender: {},
+        updatedAt: Date.now(),
+      },
+    ]);
     return () => abortCtrl.abort();
   }, [id, user_]);
 
@@ -129,24 +134,18 @@ function UserChat() {
       scrollToBottom();
     });
 
-
-
-
-    
-
     return () => {
       socket.off("joinChat", id);
       socket.off("getMessage");
     };
   }, [id]);
 
-
-  useEffect(()=>{
+  useEffect(() => {
     console.log();
     setTimeout(() => {
       lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 100);
-  },[messageSocket , selectedConversation ,id])
+  }, [messageSocket, selectedConversation, id]);
   // console.log("selectedConversation", selectedConversation);
   return (
     <>
@@ -167,13 +166,15 @@ function UserChat() {
           </div>
         ))}
 
-        {messageSocket.map((message) =>
-          message.content && (user._id === message.sender._id ? (
+        {messageSocket.map(
+          (message) =>
+            message.content &&
+            (user._id === message.sender._id ? (
               <Sender message={message} />
-          ) : (
-            <Resever message={message} />
-          )
-        ))}
+            ) : (
+              <Resever message={message} />
+            ))
+        )}
       </div>
       {/* </InfiniteScroll> */}
 

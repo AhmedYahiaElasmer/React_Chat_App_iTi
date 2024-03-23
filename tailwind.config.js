@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys */
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [

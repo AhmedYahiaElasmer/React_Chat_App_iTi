@@ -24,9 +24,9 @@ const Auth = () => {
   const { setAllChats, allChats } = useChats();
   const { requestApi } = useRequest();
   const { getAuthUser } = useAuth();
+  const userId = JSON.parse(getAuthUser("user"))._id;
   const socket = useContext(SocketContext);
 
-  const userId = JSON.parse(getAuthUser("user"))._id;
   // console.log(JSON.parse(getAuthUser("user"))._id);
 
   useEffect(() => {
