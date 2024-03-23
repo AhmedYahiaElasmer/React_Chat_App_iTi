@@ -11,15 +11,14 @@ import Avatar from "../Avatar";
 import { useChats, useConversation } from "../../zustand/zustand";
 import { useSearchParams } from "react-router-dom";
 
-
-const ChatNavBar = ({openModal, openProfileModal}) => {
+const ChatNavBar = ({ openModal, openProfileModal }) => {
   const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 1100);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedChat, setselectedChat] = useState();
   const { selectedConversation } = useConversation();
   const { setAllChats, allChats } = useChats();
 
   const id = searchParams.get("id");
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,10 +32,17 @@ const ChatNavBar = ({openModal, openProfileModal}) => {
     };
   }, []);
 
-
-  const selectedChat = allChats[
-    allChats.findIndex((chat) => chat._id ===id )
-  ];
+  // const selectedChat = allChats[
+  //   allChats.findIndex((chat) => chat._id ===id )
+  // ];
+  const index = allChats?.findIndex((chat) => chat?._id === id);
+  useEffect(() => {
+    console.log("index", index);
+    if (index > -1) {
+      setselectedChat(allChats[index]);
+      console.log("index", index);
+    }
+  }, [id]);
 
   // console.log(selectedChat , id);
 
@@ -64,7 +70,11 @@ const ChatNavBar = ({openModal, openProfileModal}) => {
           </p>
           {isScreenSmall ? (
             <p>
-              <Drawer openModal={openModal} openProfileModal={openProfileModal} className="z-3" />
+              <Drawer
+                openModal={openModal}
+                openProfileModal={openProfileModal}
+                className="z-3"
+              />
             </p>
           ) : (
             <p>

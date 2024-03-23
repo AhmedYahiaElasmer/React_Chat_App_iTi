@@ -15,7 +15,19 @@ const User = (props) => {
         user.members.length > 2 ? (
           "group"
         ) : (
+
+          // <>
+          // member._id ? (
+          //     member._id == userId ? null : (
+          //       <Avatar isMessage={true} initImage={member.image} />
+          //     )
+          //   ) : member == userId ? null : (
+          //     <Avatar isMessage={true} initImage={member.image} />
+          //   )
+          // )
+          // </>
           user.members.map((member) =>
+          member._id ? (
             member._id == _id ? null : (
               <>
                 {/* {console.log(member)} */}
@@ -25,8 +37,14 @@ const User = (props) => {
                   mode={member.isOnline ? "online" : "offline"}
                 />
               </>
+            )): member == _id ? null : (
+              <Avatar
+              isMessage={true}
+              initImage={isChat ? member.image : initImage}
+              mode={member.isOnline ? "online" : "offline"}
+            />
             )
-          )
+          ) 
         )
       ) : (
         <Avatar
