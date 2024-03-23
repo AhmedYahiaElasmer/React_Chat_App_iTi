@@ -43,11 +43,11 @@ function NewGroup({ show, onClose, onConfirm, onCancel }) {
       toast.error("At least 2 users must be added");
       return;
     }
-    // You can pass the group name and selected users to the onConfirm function
+
     onConfirm(groupChatName, selectedUsers);
   };
 
-  // Filter users based on search term
+
   const filteredUsers = allUsers.filter(
     (user) =>
       user.firstname.toLowerCase().includes(search.toLowerCase()) ||
@@ -113,7 +113,7 @@ function NewGroup({ show, onClose, onConfirm, onCancel }) {
               ))}
             </div>
           </div>
-          {/*selected users */}
+    
           <div className="mt-2 h-24 md:h-15 mb-3">
             {selectedUsers.map((userId) => {
               const selectedUser = allUsers.find((user) => user._id === userId);
