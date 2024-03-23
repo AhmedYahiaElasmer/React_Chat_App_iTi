@@ -47,7 +47,6 @@ function NewGroup({ show, onClose, onConfirm, onCancel }) {
     onConfirm(groupChatName, selectedUsers);
   };
 
-
   const filteredUsers = allUsers.filter(
     (user) =>
       user.firstname.toLowerCase().includes(search.toLowerCase()) ||
@@ -78,10 +77,10 @@ function NewGroup({ show, onClose, onConfirm, onCancel }) {
             </label>
             <input
               type="text"
-              id="group-chat-name"
+              id="group-chat-name "
               value={groupChatName}
               onChange={handleGroupChatNameChange}
-              className="mt-1 p-2 border border-gray-300  rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full"
+              className="mt-1 p-2 border border-gray-300 text-zinc-950 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full"
             />
           </div>
           <div className="mt-3">
@@ -96,7 +95,7 @@ function NewGroup({ show, onClose, onConfirm, onCancel }) {
               id="user-search"
               value={search}
               onChange={handleUserSearchChange}
-              className="mt-1 p-2 border border-gray-300  rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full"
+              className="mt-1 p-2 border border-gray-300  text-zinc-950 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full"
             />
             <div className=" mt-3  scrollbar overflow-y-scroll h-44  md:h-56">
               {filteredUsers.map((user) => (
@@ -113,7 +112,7 @@ function NewGroup({ show, onClose, onConfirm, onCancel }) {
               ))}
             </div>
           </div>
-    
+
           <div className="mt-2 h-24 md:h-15 mb-3">
             {selectedUsers.map((userId) => {
               const selectedUser = allUsers.find((user) => user._id === userId);
