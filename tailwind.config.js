@@ -7,6 +7,9 @@ export default {
     "node_modules/react-daisyui/dist/**/*.js",
   ],
   theme: {
+    fontFamily: {
+      sans: ['Montserrat', 'sans-serif'],
+    },
     extend: {
       colors: {
         mytheme: {
@@ -16,11 +19,9 @@ export default {
         },
         gray: { 50: "#fffafa" },
       },
-      fontFamily: { montserrat: "Montserrat" },
       backgroundImage: {
         "grad-color": "linear-gradient(90deg, #041AD8 0%, #B012AA 78.84%)",
-        // gradient: "linear-gradient(180deg, #302f2f,#000000)",
-        // gradient1: "radial-gradient(180deg, #ffffff,#000000,#101010)",
+
       },
     },
   },

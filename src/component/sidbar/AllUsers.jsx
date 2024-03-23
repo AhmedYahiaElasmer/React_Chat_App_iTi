@@ -10,8 +10,7 @@ const AllUsers = (props) => {
   const { allUsers } = useAllUsers();
   const { allChats } = useChats();
   const { loading_ } = useRequest();
-  // console.log(allChats);
-  // console.log(allUsers);
+
   return (
     <>
       {loading_ ? (
@@ -23,7 +22,7 @@ const AllUsers = (props) => {
       } */}
           {/* {console.log(allUsers)} */}
           <h4 className="font-medium pb-4">All Users</h4>
-          <div className="flex flex-col scrollbar scrol h-screen items-start overflow-auto gap-5">
+          <div className="flex flex-col scrol scrollbar items-start  gap-5">
             {isChat ? (
               <>
                 {allChats?.map((chat) => (
