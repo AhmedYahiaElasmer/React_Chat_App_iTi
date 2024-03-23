@@ -17,9 +17,11 @@ export default {
 
           grad_Color: "bg-gradient-to-r from-blue-700 to-purple-800",
         },
+        gray: { 50: "#fffafa" },
       },
       backgroundImage: {
         "grad-color": "linear-gradient(90deg, #041AD8 0%, #B012AA 78.84%)",
+
       },
     },
   },

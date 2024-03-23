@@ -3,7 +3,7 @@ import BlackLogo from "../logo/BlackLogo";
 
 function RegisterLogo() {
   return (
-    <div className="min-h-full text-black md:flex md:flex-col md:justify-between md:items-center lg:pt-14 lg:pb-24 md:py-12 hidden ">
+    <div className="min-h-full text-black md:flex md:flex-col md:justify-evenly md:items-center lg:pt-14 lg:pb-24 md:py-12 hidden ">
       <div className="flex flex-col lg:gap-7  justify-center items-center">
         <div>
           <BlackLogo />
@@ -22,7 +22,7 @@ function RegisterLogo() {
           If you are already member login now...
         </p>
         <Link
-          to={"/"}
+          to={"/login"}
           className="btn btn-wide text-black bg-transparent border-black	 btnhover hover:text-white"
         >
           Login now...{" "}
