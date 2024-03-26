@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import ChatBar from "../messages/ChatBar";
 import ChatNavBar from "../messages/ChatNavBar";
 import ChatInput from "./ChatInput";
@@ -9,12 +9,8 @@ import GrayLogo from "../logo/GrayLogo";
 
 import './Nav.css'
 
-const MsgsContainer = ({openModal, openProfileModal}) => {
+const MsgsContainer =React.memo( ({openModal, openProfileModal}) => {
   const location = useLocation();
-  const [searchParams , setSearchParams] = useSearchParams();
-  const user = searchParams.get("user_");
-  const id = searchParams.get("id");
-  // console.log();
 
   return (
 
@@ -49,7 +45,7 @@ const MsgsContainer = ({openModal, openProfileModal}) => {
   )
 
 
-  }
+  })
 export default MsgsContainer;
 
 // const NoChatSelected = () => {

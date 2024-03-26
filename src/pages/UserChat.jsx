@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-// import Message from "../component/messages/Message";
+
 import { useContext, useEffect, useRef, useState } from "react";
 import useRequest from "../hooks/useRequest";
 import useAuth from "../hooks/useAuth";
@@ -7,11 +6,11 @@ import { useAllUsers, useChats, useConversation } from "../zustand/zustand";
 import { useParams, useSearchParams } from "react-router-dom";
 import Sender from "../component/messages/Sender";
 import Resever from "../component/messages/Resever";
-import InfiniteScroll from "react-infinite-scroll-component";
-import AllUsers from "../component/sidbar/AllUsers";
+
 import { SocketContext } from "../context/SocketContext";
 
 function UserChat() {
+  console.log("UserChat");
   const [messageSocket, setMessageSocket] = useState([
     {
       content: "",
@@ -36,13 +35,11 @@ function UserChat() {
   const { setAllChats, allChats } = useChats();
   const socket = useContext(SocketContext);
 
-  // let { id ,user_ } = useParams();
-
-  // console.log(id);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const id = searchParams.get("id");
   const user_ = searchParams.get("user_");
+  const id = searchParams.get("id");
+  
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -51,7 +48,7 @@ function UserChat() {
   useEffect(() => {
     const abortCtrl = new AbortController();
     const token = getAuthUser("token");
-    // console.log(token);
+
     const header = {
       Authorization: `Bearer ${token}`,
     };
@@ -62,7 +59,7 @@ function UserChat() {
         headers: header,
         signal: abortCtrl.signal,
       });
-      console.log(response);
+      
       setSearchParams({ id: response?.chat._id });
       if (response?.chat) {
         if (!allChats?.some((chat) => chat._id === response?.chat._id)) {
@@ -79,10 +76,12 @@ function UserChat() {
           signal: abortCtrl.signal,
         });
 
-        // console.log(response);
+
         if (!response) return;
+
         const chatData = response.allMessages;
         chatData.reverse();
+
         setSelectedConversation([
           ...selectedConversation,
           {
@@ -96,22 +95,16 @@ function UserChat() {
       }
     };
 
-    if (!selectedConversation.some((chat) => chat.chat_ === id) && id) {
+    if (!selectedConversation.some((chat) => chat.chat_ === id) && id !== "undefined") {
       fetchData();
     }
 
     if (user_) {
-      // console.log("user_:",user_);
+      console.log("fetching user" , user_);
       fetchUser();
     }
 
-    // setMessageSocket([
-    //   {
-    //     content: "",
-    //     sender: {},
-    //     updatedAt: Date.now(),
-    //   },
-    // ]);
+
     return () => abortCtrl.abort();
   }, [id, user_]);
 
@@ -119,10 +112,7 @@ function UserChat() {
     socket.emit("joinChat", id);
 
     socket.on("getMessage", (m, sender, chat_) => {
-      // setMessageSocket([...messageSocket,{
-      //   content:m,
-      //   sender:sender
-      // }]);
+
 
       setMessageSocket((prev) => [
         ...prev,
@@ -144,16 +134,14 @@ function UserChat() {
   }, [id]);
 
   useEffect(() => {
-    console.log();
     setTimeout(() => {
       lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 100);
   }, [messageSocket, selectedConversation, id]);
-  // console.log("selectedConversation", selectedConversation);
   return (
     <>
       <div className="flex flex-col ">
-        {console.log(messageSocket)}
+        
         {selectedConversation[
           selectedConversation.findIndex((chat) => chat.chat_ === id)
         ]?.messages[0].map((message) => (

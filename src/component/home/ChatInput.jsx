@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { FaSmile, FaPaperclip, FaTelegram } from "react-icons/fa";
 import "./ChatInput.css";
 
@@ -10,16 +10,19 @@ import Picker from '@emoji-mart/react'
 import { useSearchParams } from "react-router-dom";
 
 
-const ChatInput = () => {
+const ChatInput = React.memo(()=>{
+ 
   const [message, setMessage] = useState("");
   const [showPicker, setShowPicker] = useState(false);
-  const [selectedEmoji, setSelectedEmoji] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   
 
   const { getAuthUser } = useAuth();
-  const token = getAuthUser("token");
   const { requestApi } = useRequest();
+  const token = useCallback(async () => {
+    const authUser =  getAuthUser('token');
+    return authUser;
+  }, [getAuthUser]);
   const id = searchParams.get("id");
 
   const socket = useContext(SocketContext);
@@ -35,7 +38,7 @@ const ChatInput = () => {
     try {
       socket.emit("sendMessage", e , id , user);
         const header = {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${await token()}`,
           };
       
           const response = await requestApi("/message", {
@@ -97,6 +100,7 @@ const ChatInput = () => {
 
     
   );
-};
+  
+})
 
 export default ChatInput;

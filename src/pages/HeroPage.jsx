@@ -28,21 +28,22 @@ function HeroPage() {
         <p>Join our world and chat with your friends </p>{" "}
         <p> and create rooms in easy way !!</p>
       </div>
-      <div>
+      <div className="flex justify-center gap-3">
         <Link
           to="/register"
           className="btn btn-wide bg-transparent outline-none border-white	text-white btnhover"
         >
           Sign up now for free...
         </Link>
-      </div>
-      <div>
         <Link
           to="/login"
           className="btn btn-wide bg-transparent outline-none border-white	text-white btnhover"
         >
           Login
         </Link>
+      </div>
+      <div>
+        
       </div>
       <div className="overflow-hidden">
         <Slider images={images} />

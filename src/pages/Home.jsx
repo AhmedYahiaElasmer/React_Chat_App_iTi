@@ -1,19 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-// import Button from "../component/Button";
-// import UserChat from "./UserChat";
-// import ChatRoom from "./ChatRoom";
 import ProfileDetails from "./ProfileDetails";
 import EditDetails from "./EditDetails";
-// import useLogout from "../hooks/useLogout";
-import { Navigate } from "react-router-dom/dist";
 import Auth from "./auth";
 import { socket_, SocketContext } from "../context/SocketContext";
-// import HeroPage from "./Hero";
 import { useAuthContext } from "../context/AuthContext";
-import { useState } from "react";
+
 function Home() {
-  const { authUser } = useAuthContext();
-  // const {loading,logout}=useLogout()
+
+
   return (
     <>
       {/* <button onClick={logout}>logout</button> */}
