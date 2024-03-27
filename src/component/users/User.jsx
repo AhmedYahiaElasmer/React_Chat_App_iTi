@@ -12,7 +12,7 @@ const User = (props) => {
   return (
     <div className="chat chat-start flex justify-center items-center">
       {isChat ? (
-        user.members.length > 2 ? (
+        user?.members?.length > 2 ? (
           "group"
         ) : (
 
@@ -26,7 +26,7 @@ const User = (props) => {
           //   )
           // )
           // </>
-          user.members.map((member) =>
+          user?.members?.map((member) =>
           member._id ? (
             member._id == _id ? null : (
               <>

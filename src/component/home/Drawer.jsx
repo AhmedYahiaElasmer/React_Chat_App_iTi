@@ -19,7 +19,6 @@ const Drawer = ({openModal, openProfileModal}) => {
         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
         <div className="bgside h-lvh overflow-hidden text-white  ">
       <SidBarHeader openModal={openModal} openProfileModal={openProfileModal} />
-      <SearchBar />
       <Toggle_User_Group />
       <AllUsers />
     </div>

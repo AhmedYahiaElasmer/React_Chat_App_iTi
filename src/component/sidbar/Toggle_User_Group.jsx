@@ -1,18 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { faComment, faUserFriends } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AllUsers from "../sidbar/AllUsers";
+import SearchBar from "../sidbar/SearchBar";
+import { useAllUsers, useChats } from "../../zustand/zustand";
+
 // import UsersComponent from "./UsersComponent";
 // import ChatsComponent from "./ChatsComponent";
 
 const Toggle_User_Group = ({ users }) => {
+  const [searchChat, setSearchChat] = useState([]);
+  const { allUsers } = useAllUsers();
+  const { allChats } = useChats();
   const [selectedTab, setSelectedTab] = useState("users");
+
 
   const handleTabClick = (tab) => {
     setSelectedTab(tab);
   };
 
+  const searchInputHandler = (e) => {
+    // console.log(allUsers);
+    if (selectedTab === "chats") {
+      setSearchChat(
+        allChats.filter((chat) =>
+          chat.name.toLowerCase().includes(e.target.value.toLowerCase())
+        )
+      );
+    } else {
+      setSearchChat(
+        allUsers.filter((user) =>{
+          const combinedNames = `${user.firstname} ${user.lastname ? user.lastname : ""}`.toLowerCase();
+         return combinedNames.includes(e.target.value.toLowerCase())
+        })
+      );
+    }
+  }
+
+  useEffect(() => {
+    if(selectedTab === "chats") setSearchChat([...allChats]);
+    else setSearchChat([...allUsers]);
+  }, [selectedTab , allUsers , allChats]);
+
   return (
+    <>
+    <SearchBar  searchInputHandler={searchInputHandler}  />
+
     <div className="grid grid-cols-2 w-full items-center ">
       <div
         className={`flex gap-3 col-span-1 line justify-center items-center py-3 cursor-pointer ${
@@ -44,12 +77,14 @@ const Toggle_User_Group = ({ users }) => {
         </span>
         <p>Chats</p>
       </div>
-      {selectedTab === "users" ? (
-        <AllUsers isChat={false}  users = {users}/>
+      {/* {selectedTab === "users" ? (
+        <AllUsers isChat={false} allUsers={searchChat}  users = {users}/>
       ) : (
-        <AllUsers isChat={true} />
-      )}
+        <AllUsers isChat={true} allChats={searchChat} />
+      )} */}
+      <AllUsers isChat={selectedTab === "users"? false:true} searchChat={searchChat} />
     </div>
+    </>
   );
 };
 

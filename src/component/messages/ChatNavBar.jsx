@@ -39,14 +39,14 @@ const ChatNavBar = ({ openModal, openProfileModal }) => {
   // const selectedChat = allChats[
   //   allChats.findIndex((chat) => chat._id ===id )
   // ];
-  const index = allChats?.findIndex((chat) => chat?._id === id);
+  const index =  allChats?.findIndex((chat) => chat?._id === id);
   useEffect(() => {
-    console.log("index", index);
+    // console.log("index", index);
     if (index > -1) {
       setselectedChat(allChats[index]);
-      console.log("index", index);
+      // console.log("index", index);
     }
-  }, [id]);
+  }, [id , allChats]);
 
   // console.log(selectedChat , id);
 
@@ -62,19 +62,20 @@ const ChatNavBar = ({ openModal, openProfileModal }) => {
         className="flex justify-between bgnav py-3 px-6 items-center nav"
       >
         <div className="flex justify-center items-center gap-5 py-1">
-          {console.log(selectedChat, userId)}
           {/* <Avatar isMessage={true} initImage={""} /> */}
           {selectedChat?.members.map((member) =>
             // member == userId ? null : (
             //   <Avatar isMessage={true} initImage={member.image} />
             // )
+
             member._id ? (
               member._id == userId ? null : (
-                <Avatar isMessage={true} initImage={member.image} />
+                <Avatar key={member._id}  isMessage={true} initImage={member.image} />
               )
             ) : member == userId ? null : (
-              <Avatar isMessage={true} initImage={member.image} />
+              <Avatar key={member._id} isMessage={true} initImage={member.image} />
             )
+
           )}
           <div>{selectedChat?.name}</div>
         </div>

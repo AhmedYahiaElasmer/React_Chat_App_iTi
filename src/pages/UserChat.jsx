@@ -10,7 +10,7 @@ import Resever from "../component/messages/Resever";
 import { SocketContext } from "../context/SocketContext";
 
 function UserChat() {
-  console.log("UserChat");
+  
   const [messageSocket, setMessageSocket] = useState([
     {
       content: "",
@@ -95,12 +95,11 @@ function UserChat() {
       }
     };
 
-    if (!selectedConversation.some((chat) => chat.chat_ === id) && id !== "undefined") {
+    if (id && !selectedConversation.some((chat) => chat.chat_ === id) && id.length > 9) {
       fetchData();
     }
 
-    if (user_) {
-      console.log("fetching user" , user_);
+    if (user_ ) {
       fetchUser();
     }
 
