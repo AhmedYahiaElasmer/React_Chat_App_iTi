@@ -73,7 +73,7 @@ const ChatInput = React.memo(()=>{
     </div>
     <div className="chat-container">
       <div className="chat-input">
-        <div className="icons flex justify-center"  >
+        <div className="icons flex justify-center "  >
         
           <FaSmile className=" text-3xl cursor-pointer" onClick={()=> setShowPicker(!showPicker)}   />
           
@@ -89,7 +89,7 @@ const ChatInput = React.memo(()=>{
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <div className="icons flex justify-center"  onClick={() => sendMessage(message)}>
+        <div className="icons flex justify-center mb-0 w-[60px]"  onClick={() => sendMessage(message)}>
           <FaTelegram className=" text-3xl cursor-pointer" />
         </div>
       </div>

@@ -11,7 +11,7 @@ const Drawer = ({openModal, openProfileModal}) => {
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
        
-        <label htmlFor="my-drawer" className="btn btn-neutral drawer-button">
+        <label htmlFor="my-drawer" className="btn btn-neutral drawer-button py-2 px-2 mr-1 min-h-0 h-full md:px-4">
           <FaBars style={{ color: 'white'}} /> 
         </label>
       </div> 
