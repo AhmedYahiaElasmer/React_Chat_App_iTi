@@ -17,12 +17,9 @@ export default function useAuth() {
   {
    
     if(localStorage.getItem("token")){
-      // localStorage.removeItem("token")
-      // localStorage.removeItem("user")
+
       localStorage.clear();
     }else{
-      // sessionStorage.removeItem("token");
-      // sessionStorage.removeItem("user");
       sessionStorage.clear();
     }
   }

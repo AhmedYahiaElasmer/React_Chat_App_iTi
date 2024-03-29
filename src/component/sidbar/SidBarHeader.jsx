@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEllipsisV,
   faSignOutAlt,
+  faTrash,
   faUser,
   faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
@@ -12,8 +13,11 @@ import Avatar from "../Avatar";
 import useAuth from "../../hooks/useAuth";
 import NewGroup from "../modal/NewGroup";
 import { useState } from "react";
+import GenericModal from "../GenericModal";
 const SidBarHeader = (props) => {
   const {openModal,openProfileModal}=props
+
+  const [dialog, setDialog] = useState(false);
   const { loading, logout } = useLogout();
   const { getAuthUser } = useAuth();
   const { image } = JSON.parse(getAuthUser("user"));
@@ -41,6 +45,7 @@ const SidBarHeader = (props) => {
   // console.log(image);
 
   return (
+    <>
     <div className="flex justify-between bgnav py-3 px-6 items-center ">
       <div className="flex justify-center items-center gap-5">
         <WhiteLogo w="50" h="50" />
@@ -64,7 +69,7 @@ const SidBarHeader = (props) => {
               <li>
                 <button
                   onClick={openModal}
-                  className="text-black flex justify-around "
+                  className="text-black flex justify-between "
                 >
                   <p className=" font-medium">New Group</p>
                   <FontAwesomeIcon icon={faUserGroup} className=" " />
@@ -75,18 +80,23 @@ const SidBarHeader = (props) => {
               <li>
                 <button
                   onClick={openProfileModal}
-                  className="text-black flex justify-around "
+                  className="text-black flex justify-between "
                 >
                   <p className=" font-medium">Profile</p>
                   <FontAwesomeIcon icon={faUser} className=" " />
                 </button>
               </li>  
-              <li>
-                <a onClick={logout} className="text-black flex justify-around ">
+              <li onClick={()=>setDialog(!dialog)} className=" flex justify-between text-red-500 ">
+                  <p className=" font-medium">Delete Account <FontAwesomeIcon icon={faTrash} /></p>{" "}
+                  
+              </li>
+              <li >
+                <a onClick={logout} className="text-black flex justify-between ">
                   <p className=" font-medium">Logout</p>{" "}
                   <FontAwesomeIcon icon={faSignOutAlt} className=" " />
                 </a>
               </li>
+ 
 
             </ul>
           </div>
@@ -94,6 +104,8 @@ const SidBarHeader = (props) => {
         </div>
       </div>
     </div>
+    <GenericModal setDialog={setDialog} dialog={dialog} header={"Delete Account"} content={"Are You Should of Deleting Your Account?"} url={"auth/delete"} />
+    </>
   );
 };
 

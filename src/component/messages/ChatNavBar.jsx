@@ -12,6 +12,7 @@ import Avatar from "../Avatar";
 import { useChats, useConversation } from "../../zustand/zustand";
 import { useSearchParams } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import DropMenu from "../DropMenu";
 
 const ChatNavBar = ({ openModal, openProfileModal }) => {
   const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 1100);
@@ -96,7 +97,7 @@ const ChatNavBar = ({ openModal, openProfileModal }) => {
             </p>
           ) : (
             <p>
-              <FontAwesomeIcon icon={faEllipsisV} className="text-xl " />
+              <DropMenu headOfMenu={<FontAwesomeIcon icon={faEllipsisV} className="text-xl " />} screen={"lg"} />
             </p>
           )}
         </div>

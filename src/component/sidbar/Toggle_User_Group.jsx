@@ -38,7 +38,7 @@ const Toggle_User_Group = ({ users }) => {
   }
 
   useEffect(() => {
-    if(selectedTab === "chats") setSearchChat([...allChats]);
+    if(selectedTab === "chats" && allChats) setSearchChat([...allChats]);
     else setSearchChat([...allUsers]);
   }, [selectedTab , allUsers , allChats]);
 

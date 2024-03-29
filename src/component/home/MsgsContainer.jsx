@@ -36,7 +36,7 @@ const MsgsContainer = React.memo(({ openModal, openProfileModal }) => {
             openProfileModal={openProfileModal}
             className="nav"
           />
-   <DropMenu/>
+          <DropMenu headOfMenu={"menu"} screen={"sm"} />
 
           {/* msg-container */}
           <div
